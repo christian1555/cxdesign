@@ -744,11 +744,16 @@ body.subpage-mode .navbar-wrapper {
         width: 100%;
         max-width: 100%;
         align-self: auto;
-        height: 260px;
+        flex-direction: row;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        height: auto;
     }
 
     .subpage-right img {
         flex: none;
-        height: 100%;
+        width: 85%;
+        height: auto;
+        object-fit: contain;
     }
 }
