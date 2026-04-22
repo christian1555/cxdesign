@@ -1,0 +1,203 @@
+/* ============================================
+   SCROLLBAR STYLING — Single source of truth
+
+   Two-class system for every suggestion box:
+
+     .suggestion-box      → outer container
+       Pads 10px, flex column, overflow hidden.
+       Pushes the inner scroller (and its
+       scrollbar) 10px inset from the edge.
+
+     .suggestion-scroller → inner scrollable
+       overflow-y: auto, flex: 1, 6px thumb.
+       Sits inside .suggestion-box so the
+       scrollbar is always 10px from the
+       container border.
+
+   This is how AI Chat always looked. Now every
+   suggestion box uses the exact same layout.
+   ============================================ */
+
+.suggestion-box {
+    /* 5px right padding — the other 5px is on the
+       scroller's padding-right, forcing the scrollbar
+       thumb into the middle of the 10px right channel. */
+    padding: 10px 5px 10px 10px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    /* Global border for all suggestion dropdowns —
+       matches the widget border brightness exactly */
+    border: 1px solid var(--widget-border, rgba(255, 255, 255, 0.2));
+    border-radius: var(--icon-radius, 12px);
+}
+
+.suggestion-scroller {
+    overflow-y: auto;
+    /* auto basis so the child sizes to content first,
+       then shrinks when parent hits max-height. */
+    flex: 1 1 auto;
+    min-height: 0;
+    /* 5px right padding pushes content away from scrollbar,
+       centering the thumb between the two 5px gaps. */
+    padding-right: 5px;
+}
+
+.suggestion-scroller::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+.suggestion-scroller::-webkit-scrollbar-button {
+    display: none;
+}
+
+.suggestion-scroller::-webkit-scrollbar-track {
+    background: transparent;
+    margin-block: 6px;
+}
+
+.suggestion-scroller::-webkit-scrollbar-thumb {
+    background-color: var(--widget-scrollbar-thumb, rgba(255, 255, 255, 0.1));
+    border-radius: 6px;
+    min-height: 40px;
+    transition: background-color 0.2s ease;
+}
+
+.suggestion-scroller::-webkit-scrollbar-thumb:hover {
+    background-color: var(--widget-scrollbar-thumb-hover, rgba(255, 255, 255, 0.3));
+}
+
+/* ===========================================
+   Legacy / non-input-bar widget scrollbars
+   Same visual styling, applied by class name.
+   These are widgets outside the input bar that
+   also need the subtle 6px scrollbar.
+   =========================================== */
+
+.custom-scrollbar::-webkit-scrollbar,
+.stocks-scrollable::-webkit-scrollbar,
+.calendar-events-content::-webkit-scrollbar,
+.calendar-events-section::-webkit-scrollbar,
+.quick-links-content::-webkit-scrollbar,
+.apps-scroller-content::-webkit-scrollbar,
+.iconify-results::-webkit-scrollbar,
+.widget-list::-webkit-scrollbar,
+#appsList::-webkit-scrollbar,
+#linksList::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-button,
+.stocks-scrollable::-webkit-scrollbar-button,
+.calendar-events-content::-webkit-scrollbar-button,
+.calendar-events-section::-webkit-scrollbar-button,
+.quick-links-content::-webkit-scrollbar-button,
+.apps-scroller-content::-webkit-scrollbar-button,
+.iconify-results::-webkit-scrollbar-button,
+.widget-list::-webkit-scrollbar-button,
+#appsList::-webkit-scrollbar-button,
+#linksList::-webkit-scrollbar-button {
+    display: none;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track,
+.stocks-scrollable::-webkit-scrollbar-track,
+.calendar-events-content::-webkit-scrollbar-track,
+.calendar-events-section::-webkit-scrollbar-track,
+.quick-links-content::-webkit-scrollbar-track,
+.apps-scroller-content::-webkit-scrollbar-track,
+.iconify-results::-webkit-scrollbar-track,
+.widget-list::-webkit-scrollbar-track,
+#appsList::-webkit-scrollbar-track,
+#linksList::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb,
+.stocks-scrollable::-webkit-scrollbar-thumb,
+.calendar-events-content::-webkit-scrollbar-thumb,
+.calendar-events-section::-webkit-scrollbar-thumb,
+.quick-links-content::-webkit-scrollbar-thumb,
+.apps-scroller-content::-webkit-scrollbar-thumb,
+.iconify-results::-webkit-scrollbar-thumb,
+.widget-list::-webkit-scrollbar-thumb,
+#appsList::-webkit-scrollbar-thumb,
+#linksList::-webkit-scrollbar-thumb {
+    background: var(--widget-scrollbar-thumb, rgba(255, 255, 255, 0.1));
+    border-radius: 6px;
+    min-height: 40px;
+    transition: background 0.2s ease;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover,
+.stocks-scrollable::-webkit-scrollbar-thumb:hover,
+.calendar-events-content::-webkit-scrollbar-thumb:hover,
+.calendar-events-section::-webkit-scrollbar-thumb:hover,
+.quick-links-content::-webkit-scrollbar-thumb:hover,
+.apps-scroller-content::-webkit-scrollbar-thumb:hover,
+.iconify-results::-webkit-scrollbar-thumb:hover,
+.widget-list::-webkit-scrollbar-thumb:hover,
+#appsList::-webkit-scrollbar-thumb:hover,
+#linksList::-webkit-scrollbar-thumb:hover {
+    background: var(--widget-scrollbar-thumb-hover, rgba(255, 255, 255, 0.3));
+}
+
+/* ============================================
+   SETTINGS SCROLLBAR STYLING
+   ============================================ */
+
+.settings-scrollbar::-webkit-scrollbar,
+.modal-main::-webkit-scrollbar,
+.popup-scrollable-content::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+.settings-scrollbar::-webkit-scrollbar-button,
+.modal-main::-webkit-scrollbar-button,
+.popup-scrollable-content::-webkit-scrollbar-button {
+    display: none;
+}
+
+.settings-scrollbar::-webkit-scrollbar-track,
+.modal-main::-webkit-scrollbar-track,
+.popup-scrollable-content::-webkit-scrollbar-track {
+    background: transparent;
+    margin: 8px 6px;
+}
+
+/* Light mode scrollbar thumb */
+.settings-scrollbar::-webkit-scrollbar-thumb,
+.modal-main::-webkit-scrollbar-thumb,
+.popup-scrollable-content::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    transition: background 0.2s ease;
+    min-height: 40px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+}
+
+.settings-scrollbar::-webkit-scrollbar-thumb:hover,
+.modal-main::-webkit-scrollbar-thumb:hover,
+.popup-scrollable-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.4);
+    background-clip: padding-box;
+}
+
+/* Dark mode scrollbar thumb */
+:root[style*="--settings-bg-color: #1c1c1c"] .settings-scrollbar::-webkit-scrollbar-thumb,
+:root[style*="--settings-bg-color: #1c1c1c"] .modal-main::-webkit-scrollbar-thumb,
+:root[style*="--settings-bg-color: #1c1c1c"] .popup-scrollable-content::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    background-clip: padding-box;
+}
+
+:root[style*="--settings-bg-color: #1c1c1c"] .settings-scrollbar::-webkit-scrollbar-thumb:hover,
+:root[style*="--settings-bg-color: #1c1c1c"] .modal-main::-webkit-scrollbar-thumb:hover,
+:root[style*="--settings-bg-color: #1c1c1c"] .popup-scrollable-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.4);
+    background-clip: padding-box;
+}

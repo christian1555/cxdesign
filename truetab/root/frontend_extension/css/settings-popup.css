@@ -1,0 +1,286 @@
+/* ============================================
+   WIDGET SETTINGS POPUP - macOS/Right-Click Menu Inspired
+   ============================================ */
+
+.widget-settings-popup {
+    display: none;
+    position: fixed;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 20px;
+    width: 280px;
+    max-height: none;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    z-index: 1001;
+    color: var(--settings-text-color);
+    padding: 0;
+}
+
+/* Dark mode variant */
+:root[style*="--settings-bg-color: #1c1c1c"] .widget-settings-popup {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Light mode variant */
+:root[style*="--settings-bg-color: #f9f9f9"] .widget-settings-popup,
+:root[style*="--settings-bg-color: #f5f7f8"] .widget-settings-popup {
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Light mode: proper text color for widget settings popup */
+:root[style*="--settings-bg-color: #f9f9f9"] .widget-settings-popup,
+:root[style*="--settings-bg-color: #f9f9f9"] .widget-settings-popup label,
+:root[style*="--settings-bg-color: #f9f9f9"] .widget-settings-popup .settings-menu-item,
+:root[style*="--settings-bg-color: #f9f9f9"] .widget-settings-popup .widget-list-title,
+:root[style*="--settings-bg-color: #f9f9f9"] .widget-settings-popup .popup-tab,
+:root[style*="--settings-bg-color: #f9f9f9"] .widget-settings-popup h3,
+:root[style*="--settings-bg-color: #f9f9f9"] .widget-settings-popup .settings-slider-value,
+:root[style*="--settings-bg-color: #f9f9f9"] .widget-settings-popup input,
+:root[style*="--settings-bg-color: #f9f9f9"] .widget-settings-popup .settings-list-item-title {
+    color: var(--settings-text-color);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.widget-settings-popup.active {
+    display: flex;
+    flex-direction: column;
+}
+
+.widget-settings-header {
+    display: none;
+}
+
+.popup-scrollable-content {
+    flex: 1;
+    overflow: visible;
+    padding: 10px;
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+/* Popup Tabs */
+.popup-tabs {
+    display: flex;
+    gap: 8px;
+}
+
+/* Tab Selector Container (for App/Widget tabs) */
+.popup-tab-selector {
+    display: flex;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 8px;
+    margin-left: -10px;
+    margin-right: -10px;
+    margin-top: -10px;
+    width: calc(100% + 20px);
+    border-radius: 20px 20px 0 0;
+    overflow: hidden;
+}
+
+.popup-tab-selector .popup-tab {
+    flex: 1;
+    padding: 14px 12px;
+    text-align: center;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--settings-text-color);
+    opacity: 0.6;
+    transition: all 0.15s ease;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.popup-tab-selector .popup-tab:hover {
+    opacity: 0.8;
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.popup-tab-selector .popup-tab.active {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--settings-text-color);
+    font-weight: 600;
+}
+
+.popup-tab-selector .popup-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--settings-accent-color);
+}
+
+:root[style*="--settings-bg-color: #1c1c1c"] .popup-tab-selector .popup-tab.active {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* Popup Tab Buttons (for Save/Cancel/etc) */
+.popup-tab {
+    flex: 1;
+    padding: 8px 12px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--settings-text-color);
+    transition: all 0.15s ease;
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.popup-tab:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--settings-accent-color);
+}
+
+:root[style*="--settings-bg-color: #1c1c1c"] .popup-tab {
+    background: rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Cancel/Save Button Variants */
+.popup-tab-cancel:hover {
+    border-color: var(--settings-close-border, #d78181);
+    box-shadow: 0 0 8px rgba(230, 90, 117, 0.4);
+}
+
+.popup-tab-save:hover {
+    border-color: var(--settings-accent-color);
+    box-shadow: 0 0 8px color-mix(in srgb, var(--settings-accent-color) 40%, transparent);
+}
+
+/* Popup Panels */
+.popup-panel {
+    display: none;
+}
+
+.popup-panel.active {
+    display: block;
+}
+
+/* Widget List */
+.widget-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    max-height: 309.5px;
+    overflow-y: auto;
+    padding-left: 2px;
+    padding-right: 6px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+
+.widget-list-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    min-height: 44px;
+}
+
+.widget-list-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--settings-accent-color);
+}
+
+.widget-list-item:active {
+    background: var(--settings-accent-color);
+}
+
+.widget-list-item:active .widget-list-title,
+.widget-list-item:active .widget-list-desc {
+    color: #ffffff;
+}
+
+:root[style*="--settings-bg-color: #1c1c1c"] .widget-list-item {
+    background: rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.widget-list-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+}
+
+.widget-list-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.widget-list-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--settings-text-color);
+    margin-bottom: 1px;
+}
+
+.widget-list-desc {
+    font-size: 11px;
+    color: var(--settings-inactive-color);
+    opacity: 0.7;
+}
+
+/* Light mode: widget descriptions should be dark */
+:root[style*="--settings-bg-color: #f9f9f9"] .widget-list-desc,
+:root[style*="--settings-bg-color: #f5f7f8"] .widget-list-desc {
+    color: #0f0f0f;
+    opacity: 0.6;
+}
+
+.widget-settings-popup h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: var(--settings-accent-color);
+}
+
+/* Close button - Always white icon on dark background */
+.widget-settings-popup .close-settings {
+    background: rgba(0, 0, 0, 0.6);
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #ffffff;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    z-index: 10;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+}
+
+.widget-settings-popup .close-settings:hover {
+    opacity: 0.9;
+}

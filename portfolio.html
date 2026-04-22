@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="Christian Christensen">
+<title>Portfolio — Multimediedesigner</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,700&family=DM+Serif+Display:ital@0;1&family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Raleway:ital,wght@0,100..900;1,100..900&family=Space+Grotesk:wght@300..700&family=Syne:wght@400..800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styles/base.css">
+<link rel="stylesheet" href="styles/main.css">
+<link rel="stylesheet" href="styles/components.css">
+<link rel="stylesheet" href="styles/responsive.css">
+</head>
+
+<body>
+
+<div class="lang-picker">
+  <button class="lang-opt current" data-lang="da" onclick="switchLang('da')">DA</button>
+  <button class="lang-opt" data-lang="en" onclick="switchLang('en')">EN</button>
+</div>
+
+<div class="texture-overlay"></div>
+<nav class="page-dots" id="pageNav"></nav>
+
+
+<!-- landing -->
+<section class="landing" id="landing">
+  <div class="glow-bg"></div>
+
+  <div class="landing-split">
+    <div class="landing-text">
+      <span class="overline vis" data-i18n="landing.tag">Christian Christensen</span>
+
+      <h1 class="big-title vis s1">
+        <span data-i18n="landing.line1">UI/UX, web og AI</span><br>
+        <span class="grad" data-i18n="landing.line2">Digitale løsninger bygget til fremtiden.</span>
+      </h1>
+
+      <p class="intro vis s2" data-i18n="landing.desc">
+        Multimediedesigner med speciale i UI/UX og webudvikling. Jeg arbejder med både design og kode, med stor fokus på hvordan AI forandrer måden vi bygger digitale produkter på — og hvordan det kan udnyttes til at skabe bedre løsninger, hurtigere.
+      </p>
+
+      <div class="tags vis">
+        <span class="tag" data-i18n="pill.uiux">UI / UX Design</span>
+        <span class="tag" data-i18n="pill.web">Webudvikling</span>
+        <span class="tag" data-i18n="pill.ai">AI Agenter</span>
+        <span class="tag" data-i18n="pill.arch">Systemarkitektur</span>
+      </div>
+    </div>
+
+    <div class="landing-portrait vis s2">
+      <div class="portrait-frame">
+        <img src="images/profilpic.png" alt="Christian Christensen" class="portrait-img">
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span data-i18n="landing.scroll">Scroll ned</span>
+    <div class="chevron"></div>
+  </div>
+</section>
+
+
+<!-- kompetencer -->
+<section class="kompetencer" id="kompetencer">
+  <div class="komp-grid">
+    <div class="komp-top">
+      <h2 class="sec-heading vis" data-i18n="skills.heading">Design der bevæger.<br>Systemer der virker.</h2>
+      <p class="komp-desc vis" data-i18n="skills.desc">
+        Fire områder jeg arbejder med dagligt — fra klassisk UI/UX til agent-systemer der bygger software sammen.
+      </p>
+    </div>
+
+    <div class="kort vis s1">
+      <div class="kort-ico">◎</div>
+      <h3>UI / UX Design</h3>
+      <p data-i18n="skills.uiux">
+        Wireframes, prototyper og interfaces med skarpt blik for detaljen. Smooth flows og æstetik der hænger sammen fra første klik til sidste. Design der ser lækkert ud — og fungerer lige så godt.
+      </p>
+      <span class="kort-tag" data-i18n="skills.uiux.tag">Primær specialisering</span>
+    </div>
+
+    <div class="kort vis s2">
+      <div class="kort-ico">⟨/⟩</div>
+      <h3 data-i18n="skills.dev.title">Webudvikling</h3>
+      <p data-i18n="skills.dev">
+        Jeg bygger websites og webapps med moderne tech, hvor I selv ejer domæne og kode bagefter. Jeg udvikler løsninger, der ikke bare ser godt ud, men også performer hurtigt, er skalerbare og skabt med brugeroplevelsen i centrum.
+      </p>
+      <span class="kort-tag" data-i18n="skills.dev.tag">Kerneområde</span>
+    </div>
+
+    <div class="kort vis s3">
+      <div class="kort-ico">⬡</div>
+      <h3 data-i18n="skills.agents.title">AI Agent-systemer</h3>
+      <p data-i18n="skills.agents">
+        Multi-agent systemer er et af mine fokusområder, som jeg i stigende grad integrerer i mine workflows: autonome agenter, der samarbejder, løser opgaver og reelt udvikler software sammen.
+      </p>
+      <span class="kort-tag" data-i18n="skills.agents.tag">Personlig passion</span>
+    </div>
+
+    <div class="kort vis s4">
+      <div class="kort-ico">◈</div>
+      <h3 data-i18n="skills.arch.title">AI Systemarkitektur</h3>
+      <p data-i18n="skills.arch">
+        Det store billede bag AI-systemer — hvordan agenter snakker sammen, deler hukommelse, håndterer fejl og skalerer uden at det hele vælter.
+      </p>
+      <span class="kort-tag" data-i18n="skills.arch.tag">Hobby &amp; udforskning</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- mors firma -->
+<section class="projekt" id="norrild">
+  <div class="projekt-split">
+    <div class="projekt-img">
+      <div class="cover norrild-bg">
+        <iframe class="projekt-demo-frame" data-src="norrildconsult/Norrild Consult · Forside.html"></iframe>
+      </div>
+      <div class="projekt-overlay overlay-gold"></div>
+      <div class="fade-edge"></div>
+      <div class="demo-controls">
+        <button class="demo-main" type="button">
+          <span class="demo-state demo-state-idle">
+            <svg viewBox="0 0 24 24"><polygon points="7 4 7 20 20 12" fill="currentColor"/></svg>
+            <span data-i18n="cta.startdemo">Start demo</span>
+          </span>
+          <span class="demo-state demo-state-active">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
+            <span data-i18n="cta.closedemo">Luk demo</span>
+          </span>
+        </button>
+        <button class="demo-expand" type="button" aria-label="Toggle fullscreen">
+          <svg class="ico-expand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6"/><path d="M21 3l-7 7"/><path d="M9 21H3v-6"/><path d="M3 21l7-7"/></svg>
+          <svg class="ico-collapse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 10h6"/><path d="M20 10v-6"/><path d="M20 4l-7 7"/><path d="M10 14H4"/><path d="M4 14v6"/><path d="M4 20l7-7"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="projekt-info">
+      <h2 class="projekt-title vis">Norrild Consult</h2>
+      <p class="projekt-desc vis" data-i18n="norrild.desc">
+        Hjemmeside til en professionel konsulentvirksomhed. Hele siden er designet og bygget af mig — fra layout og branding til den endelige kode.
+      </p>
+      <div class="techstack vis">
+        <span>HTML</span>
+        <span>CSS</span>
+        <span>JavaScript</span>
+        <span>PHP</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="projekt" id="truetab">
+  <div class="projekt-split flip">
+    <div class="projekt-img">
+      <div class="cover truetab-bg">
+        <iframe class="projekt-demo-frame" data-src="truetab/root/frontend_extension/truetab_main.html"></iframe>
+      </div>
+      <div class="projekt-overlay overlay-gold"></div>
+      <div class="fade-edge"></div>
+      <div class="demo-controls">
+        <button class="demo-main" type="button">
+          <span class="demo-state demo-state-idle">
+            <svg viewBox="0 0 24 24"><polygon points="7 4 7 20 20 12" fill="currentColor"/></svg>
+            <span data-i18n="cta.startdemo">Start demo</span>
+          </span>
+          <span class="demo-state demo-state-active">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
+            <span data-i18n="cta.closedemo">Luk demo</span>
+          </span>
+        </button>
+        <button class="demo-expand" type="button" aria-label="Toggle fullscreen">
+          <svg class="ico-expand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6"/><path d="M21 3l-7 7"/><path d="M9 21H3v-6"/><path d="M3 21l7-7"/></svg>
+          <svg class="ico-collapse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 10h6"/><path d="M20 10v-6"/><path d="M20 4l-7 7"/><path d="M10 14H4"/><path d="M4 14v6"/><path d="M4 20l7-7"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="projekt-info">
+      <h2 class="projekt-title vis">TrueTab</h2>
+      <p class="projekt-desc vis" data-i18n="truetab.desc">
+        Chromium extension jeg byggede for at gøre nye faner faktisk brugbare. Custom widgets, mørkt tema, og et interface der ikke er irriterende at kigge på 50 gange om dagen.
+      </p>
+      <div class="techstack vis">
+        <span>JavaScript</span>
+        <span>Chrome APIs</span>
+        <span>HTML</span>
+        <span>CSS</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="projekt" id="palisade">
+  <div class="projekt-split">
+    <div class="projekt-img">
+      <div class="cover palisade-bg">
+        <iframe class="projekt-demo-frame" data-src="palisadejurassic/index.html"></iframe>
+      </div>
+      <div class="projekt-overlay overlay-gold"></div>
+      <div class="fade-edge"></div>
+      <div class="demo-controls">
+        <button class="demo-main" type="button">
+          <span class="demo-state demo-state-idle">
+            <svg viewBox="0 0 24 24"><polygon points="7 4 7 20 20 12" fill="currentColor"/></svg>
+            <span data-i18n="cta.startdemo">Start demo</span>
+          </span>
+          <span class="demo-state demo-state-active">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
+            <span data-i18n="cta.closedemo">Luk demo</span>
+          </span>
+        </button>
+        <button class="demo-expand" type="button" aria-label="Toggle fullscreen">
+          <svg class="ico-expand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6"/><path d="M21 3l-7 7"/><path d="M9 21H3v-6"/><path d="M3 21l7-7"/></svg>
+          <svg class="ico-collapse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 10h6"/><path d="M20 10v-6"/><path d="M20 4l-7 7"/><path d="M10 14H4"/><path d="M4 14v6"/><path d="M4 20l7-7"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="projekt-info">
+      <h2 class="projekt-title vis">Palisade &amp; Jurassic</h2>
+      <p class="projekt-desc vis" data-i18n="palisade.desc">
+        Webdesign hvor hele processen fra idé til færdigt produkt er lavet med AI som en integreret del af workflowet. Responsivt, hurtigt, og med et moderne visuelt udtryk.
+      </p>
+      <div class="techstack vis">
+        <span>Figma</span>
+        <span>HTML</span>
+        <span>SCSS</span>
+        <span>JavaScript</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- proces -->
+<section class="proces" id="proces">
+  <div class="proces-inner">
+    <div class="proces-header">
+      <h2 class="sec-heading vis" data-i18n="proces.heading">Fra skitse til<br>færdigt produkt.</h2>
+      <p class="proces-desc vis" data-i18n="proces.desc">
+        Wireframes, mockups, og prototyper — hele vejen fra første idé til det endelige design. Herunder kan du se min proces og downloade de originale filer.
+      </p>
+    </div>
+
+    <div class="proces-slider">
+      <div class="proces-nav">
+        <button class="proces-tab active" data-tab="wireframes" data-i18n="proces.tab.wire">Wireframes</button>
+        <button class="proces-tab" data-tab="mockups" data-i18n="proces.tab.mock">Mockups</button>
+        <button class="proces-tab" data-tab="kode" data-i18n="proces.tab.code">Kode</button>
+      </div>
+
+      <div class="proces-panel active" id="panel-wireframes">
+        <div class="proces-grid">
+          <div class="proces-card vis">
+            <div class="proces-card-preview wireframe-placeholder">
+              <svg viewBox="0 0 300 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="10" y="10" width="280" height="30" rx="4" stroke="currentColor" stroke-width="1" opacity="0.3"/>
+                <rect x="10" y="50" width="180" height="12" rx="2" fill="currentColor" opacity="0.15"/>
+                <rect x="10" y="70" width="130" height="8" rx="2" fill="currentColor" opacity="0.08"/>
+                <rect x="10" y="85" width="160" height="8" rx="2" fill="currentColor" opacity="0.08"/>
+                <rect x="10" y="110" width="120" height="80" rx="4" stroke="currentColor" stroke-width="1" opacity="0.2"/>
+                <rect x="140" y="110" width="150" height="80" rx="4" stroke="currentColor" stroke-width="1" opacity="0.2"/>
+              </svg>
+            </div>
+            <span class="proces-card-label">Portfolio — Wireframe v1</span>
+            <a href="#" class="proces-download" data-i18n="proces.download">Download .psd</a>
+          </div>
+          <div class="proces-card vis s1">
+            <div class="proces-card-preview wireframe-placeholder">
+              <svg viewBox="0 0 300 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="10" y="10" width="60" height="180" rx="4" stroke="currentColor" stroke-width="1" opacity="0.2"/>
+                <rect x="80" y="10" width="210" height="80" rx="4" stroke="currentColor" stroke-width="1" opacity="0.3"/>
+                <rect x="80" y="100" width="100" height="90" rx="4" stroke="currentColor" stroke-width="1" opacity="0.2"/>
+                <rect x="190" y="100" width="100" height="90" rx="4" stroke="currentColor" stroke-width="1" opacity="0.2"/>
+              </svg>
+            </div>
+            <span class="proces-card-label">Norrild Consult — Wireframe</span>
+            <a href="#" class="proces-download" data-i18n="proces.download">Download .psd</a>
+          </div>
+          <div class="proces-card vis s2">
+            <div class="proces-card-preview wireframe-placeholder">
+              <svg viewBox="0 0 300 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="150" cy="60" r="30" stroke="currentColor" stroke-width="1" opacity="0.2"/>
+                <rect x="50" y="100" width="200" height="12" rx="2" fill="currentColor" opacity="0.1"/>
+                <rect x="70" y="120" width="160" height="8" rx="2" fill="currentColor" opacity="0.06"/>
+                <rect x="80" y="150" width="60" height="30" rx="15" stroke="currentColor" stroke-width="1" opacity="0.3"/>
+                <rect x="160" y="150" width="60" height="30" rx="15" stroke="currentColor" stroke-width="1" opacity="0.3"/>
+              </svg>
+            </div>
+            <span class="proces-card-label">TrueTab — Wireframe</span>
+            <a href="#" class="proces-download" data-i18n="proces.download">Download .psd</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="proces-panel" id="panel-mockups">
+        <div class="proces-grid">
+          <div class="proces-card vis">
+            <div class="proces-card-preview mockup-placeholder">
+              <svg viewBox="0 0 300 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="5" y="5" width="290" height="190" rx="8" fill="currentColor" opacity="0.04" stroke="currentColor" stroke-width="1" opacity="0.15"/>
+                <rect x="15" y="15" width="270" height="25" rx="4" fill="currentColor" opacity="0.06"/>
+                <rect x="15" y="50" width="270" height="100" rx="4" fill="currentColor" opacity="0.03"/>
+                <rect x="25" y="60" width="120" height="10" rx="2" fill="currentColor" opacity="0.1"/>
+                <rect x="25" y="80" width="80" height="6" rx="2" fill="currentColor" opacity="0.06"/>
+              </svg>
+            </div>
+            <span class="proces-card-label">Portfolio — High-fidelity mockup</span>
+            <a href="#" class="proces-download" data-i18n="proces.download">Download .psd</a>
+          </div>
+          <div class="proces-card vis s1">
+            <div class="proces-card-preview mockup-placeholder">
+              <svg viewBox="0 0 300 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="5" y="5" width="290" height="190" rx="8" fill="currentColor" opacity="0.04" stroke="currentColor" stroke-width="1" opacity="0.15"/>
+                <rect x="15" y="15" width="60" height="170" rx="4" fill="currentColor" opacity="0.06"/>
+                <rect x="85" y="15" width="200" height="80" rx="4" fill="currentColor" opacity="0.03"/>
+                <rect x="85" y="105" width="95" height="80" rx="4" fill="currentColor" opacity="0.03"/>
+                <rect x="190" y="105" width="95" height="80" rx="4" fill="currentColor" opacity="0.03"/>
+              </svg>
+            </div>
+            <span class="proces-card-label">Norrild Consult — Redesign mockup</span>
+            <a href="#" class="proces-download" data-i18n="proces.download">Download .psd</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="proces-panel" id="panel-kode">
+        <div class="proces-code-info vis">
+          <div class="proces-code-browser">
+            <div class="code-filelist">
+              <button class="code-fileitem active" data-file="portfolio-html" data-path="portfolio.html">
+                <span class="code-fileicon">&lt;/&gt;</span> portfolio.html
+              </button>
+              <button class="code-fileitem" data-file="script-js" data-path="javascript/script.js">
+                <span class="code-fileicon">{ }</span> script.js
+              </button>
+              <button class="code-fileitem" data-file="office-js" data-path="javascript/office.js">
+                <span class="code-fileicon">{ }</span> office.js
+              </button>
+              <button class="code-fileitem" data-file="main-css" data-path="styles/main.css">
+                <span class="code-fileicon">#</span> main.css
+              </button>
+            </div>
+            <div class="proces-code-block">
+              <div class="code-header">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+                <span class="code-filename" id="codeFilename">portfolio.html</span>
+                <a class="code-download-btn" id="codeDownload" href="portfolio.html" download data-i18n="proces.code.download">Download</a>
+              </div>
+              <pre class="code-body"><code class="code-snippet active" data-snippet="portfolio-html"><span class="code-tag">&lt;section</span> <span class="code-attr">class</span>=<span class="code-str">"landing"</span><span class="code-tag">&gt;</span>
+  <span class="code-tag">&lt;h1</span> <span class="code-attr">class</span>=<span class="code-str">"big-title"</span><span class="code-tag">&gt;</span>
+    UI / UX Designer
+    <span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-str">"grad"</span><span class="code-tag">&gt;</span>&amp; Multimediedesigner<span class="code-tag">&lt;/span&gt;</span>
+  <span class="code-tag">&lt;/h1&gt;</span>
+<span class="code-tag">&lt;/section&gt;</span></code><code class="code-snippet" data-snippet="script-js"><span class="code-attr">const</span> i18n = {
+  en: {
+    <span class="code-str">'landing.tag'</span>: <span class="code-str">'Christian Christensen'</span>,
+    <span class="code-str">'landing.line1'</span>: <span class="code-str">'UI / UX Designer'</span>,
+    <span class="code-str">'landing.line2'</span>: <span class="code-str">'&amp; Multimedia Designer'</span>,
+  }
+};</code><code class="code-snippet" data-snippet="office-js"><span class="code-attr">const</span> API = <span class="code-str">'https://api.agentx0-palisade.uk/…/roster'</span>;
+<span class="code-attr">const</span> POLL_MS = <span class="code-str">10000</span>;
+
+<span class="code-tag">function</span> <span class="code-attr">drawAgent</span>(ctx, agent) {
+  ctx.fillStyle = agent.color;
+  ctx.fillRect(agent.x, agent.y, <span class="code-str">12</span>, <span class="code-str">16</span>);
+}</code><code class="code-snippet" data-snippet="main-css"><span class="code-tag">.big-title</span> {
+  <span class="code-attr">font-family</span>: <span class="code-str">var(--ff-display)</span>;
+  <span class="code-attr">font-size</span>: <span class="code-str">clamp(3rem, 8vw, 7rem)</span>;
+  <span class="code-attr">line-height</span>: <span class="code-str">0.95</span>;
+  <span class="code-attr">letter-spacing</span>: <span class="code-str">-0.03em</span>;
+}</code></pre>
+            </div>
+          </div>
+          <div class="proces-code-text">
+            <h3 data-i18n="proces.code.title">Kodet i hånden</h3>
+            <p data-i18n="proces.code.desc">
+              Hele skeletet af denne portfolio er skrevet i ren HTML, CSS og JavaScript — med mit eget tab-system i Sublime Text. Ingen frameworks, ingen templates. Bare ren kode og fuld kontrol over hvert eneste pixel.
+            </p>
+            <p class="proces-code-hint" data-i18n="proces.code.hint">
+              Klik på filerne til venstre for at se et udsnit, eller download den fulde kildekode.
+            </p>
+            <div class="techstack">
+              <span>HTML</span>
+              <span>CSS</span>
+              <span>JavaScript</span>
+              <span>Sublime Text</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- billedredigering -->
+<section class="foto" id="foto">
+  <div class="foto-inner">
+    <h2 class="sec-heading vis" data-i18n="foto.heading">Næsten 20 års<br>erfaring med pixels.</h2>
+    <p class="foto-desc vis" data-i18n="foto.desc">
+      Photoshop, Lightroom, teksturer, retuche, compositing — det hele. Alt fra baggrundsteksturen på denne side til professionel fotoredigering.
+    </p>
+
+    <div class="foto-grid">
+      <div class="foto-card vis">
+        <div class="foto-card-ico">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+        </div>
+        <h3 data-i18n="foto.retouch.title">Retuche & Compositing</h3>
+        <p data-i18n="foto.retouch">Portrætter, produktbilleder, og kreative composites. Photoshop har været mit primære værktøj i næsten to årtier.</p>
+      </div>
+      <div class="foto-card vis s1">
+        <div class="foto-card-ico">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <h3 data-i18n="foto.texture.title">Teksturer & Assets</h3>
+        <p data-i18n="foto.texture">Håndlavede teksturer, mønstre og grafiske elementer. Baggrunden på denne side? Tegnet i hånden og efterbehandlet i Photoshop.</p>
+      </div>
+      <div class="foto-card vis s2">
+        <div class="foto-card-ico">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        </div>
+        <h3 data-i18n="foto.color.title">Farvekorrektur</h3>
+        <p data-i18n="foto.color">Lightroom og Camera Raw til farvegradering, eksponering og toning. Giver alle billeder et konsistent og professionelt look.</p>
+      </div>
+    </div>
+
+    <div class="foto-tools vis">
+      <span>Adobe Photoshop</span>
+      <span>Adobe Lightroom</span>
+      <span>Adobe Illustrator</span>
+      <span>Camera Raw</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- wip -->
+<section class="wip" id="wip">
+  <h2 class="wip-title vis s1">
+    <span data-i18n="wip.pre">Personligt projekt:</span><br>
+    <span class="accent" data-i18n="wip.title">En browser bygget af AI-agenter</span>
+  </h2>
+
+  <p class="wip-desc vis" data-i18n="wip.desc">
+    En live-visning af mit faktiske 21-agent AI-team - de bevæger sig kun når de rent faktisk giver hinanden opgaver og er i gang med at bygge browseren. Systemet 'bagved' er bygget på OpenClaw + Custom GEPA-arkitektur med avanceret memory, sandboxed security og self-improvement loops.
+    <br><br>
+    Dette er IKKE en demo — men et live overblik over mine agenter. <br>
+    Temaet er fra mit personlige Dashboard jeg bruger til at styre mine Agenter.
+  </p>
+
+  <div class="office-live vis s2">
+    <div class="office-header">
+      <span class="office-title">DUNDER MIFFLIN · BROWSER LAB</span>
+      <span class="office-live-tag">
+        <span class="office-live-dot"></span>
+        <span data-i18n="wip.live">LIVE</span> · <span id="officeClock">--:--:--</span>
+      </span>
+    </div>
+    <div class="office-canvas-wrap">
+      <canvas id="officeCanvas" width="900" height="440"></canvas>
+      <div class="office-tooltip" id="officeTooltip"></div>
+      <div class="office-status-bar">
+        <span id="officeRoster">— / 21</span>
+        <span class="office-sep">·</span>
+        <span id="officeEvent" data-i18n="wip.connecting">forbinder til agent-roster…</span>
+      </div>
+    </div>
+    <div class="office-legend">
+      <span><i class="dot dot-orch"></i><span data-i18n="wip.legend.orch">Orkestratorer</span></span>
+      <span><i class="dot dot-dev"></i><span data-i18n="wip.legend.dev">Udviklere</span></span>
+      <span><i class="dot dot-da"></i><span data-i18n="wip.legend.da">Devil's Advocates</span></span>
+    </div>
+  </div>
+
+  <div class="feature-tags vis">
+    <span>Privacy-first</span>
+    <span data-i18n="wip.hl.agents">AI-agenter</span>
+    <span data-i18n="wip.hl.team">21-agent team</span>
+    <span data-i18n="wip.hl.chromium">Chromium-baseret</span>
+  </div>
+</section>
+
+
+<section class="kontakt" id="kontakt">
+  <h2 class="kontakt-title vis" data-i18n="kontakt.heading">Lad os skabe<br>noget sammen.</h2>
+
+  <a href="mailto:christiancpersonal@outlook.com" class="mail-link vis">christiancpersonal@outlook.com</a>
+
+  <div class="footer-row">
+    <span>© 2026</span>
+    <div class="links">
+      <!-- <a href="#">LinkedIn</a> -->
+      <a href="#">GitHub</a>
+      <!--<a href="#">Dribbble</a>-->
+    </div>
+  </div>
+</section>
+
+<script src="javascript/script.js"></script>
+<script src="javascript/office.js"></script>
+</body>
+</html>

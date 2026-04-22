@@ -1,0 +1,77 @@
+/* reset + vars */
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --gold: #C9A84C;
+  --gold-glow: rgba(201, 168, 76, 0.4);
+  --gold-soft: rgba(201, 168, 76, 0.08);
+  --gold-light: #E2C87E;
+  --bg: #07060B;
+  --bg-dark: #0C0B12;
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --card-hover: rgba(255, 255, 255, 0.06);
+  --text: #F2F0F7;
+  --text-dim: rgba(242, 240, 247, 0.68);
+  --text-faint: rgba(242, 240, 247, 0.42);
+  --border: rgba(255, 255, 255, 0.06);
+  --border-gold: rgba(201, 168, 76, 0.3);
+  /* DISPLAY — headings / titles
+     'Playfair Display', serif        ← AKTIV
+     'Cormorant Garamond', serif
+     'Fraunces', serif
+     'Instrument Serif', serif
+     'DM Serif Display', serif
+     'Syne', sans-serif
+     'Plus Jakarta Sans', sans-serif
+     'Bebas Neue', sans-serif
+     'Cabinet Grotesk', sans-serif    ← hent fra fontshare.com, tilføj i <head> */
+  --ff-display: 'Bebas Neue', sans-serif;
+
+  /* BODY — brødtekst / intro
+     'Outfit', sans-serif             ← AKTIV
+     'Space Grotesk', sans-serif
+     'Raleway', sans-serif
+     'Plus Jakarta Sans', sans-serif
+     'DM Sans', sans-serif
+     'Inter', sans-serif */
+  --ff-body: 'Outfit', sans-serif;
+
+  /* MONO — labels / tags / kode
+     'JetBrains Mono', monospace      ← AKTIV
+     'Fira Code', monospace
+     'Space Mono', monospace
+     'IBM Plex Mono', monospace */
+  --ff-mono: 'Bebas Neue', sans-serif;
+  --spacing: clamp(2rem, 5vw, 6rem);
+}
+
+html {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold) transparent;
+  background: var(--bg);
+}
+
+body {
+  position: relative;
+  font-family: var(--ff-body);
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  /* firefox har brug for denne separat fra -webkit varianten, ellers ser teksten lort ud */
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+section {
+  min-height: 100vh;
+  scroll-snap-align: start;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: var(--spacing);
+  overflow: hidden;
+}

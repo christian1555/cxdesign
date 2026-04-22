@@ -1,0 +1,621 @@
+/* ============================================
+   SETTINGS FORM COMPONENTS
+   Menu items, toggles, inputs, selects, sliders, buttons, lists
+   ============================================ */
+
+/* Menu-Style Settings Items */
+.settings-menu-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    color: var(--settings-text-color);
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: background 0.15s ease;
+    min-height: 40px;
+}
+
+.settings-menu-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+:root[style*="--settings-bg-color: #1c1c1c"] .settings-menu-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.settings-menu-item label {
+    flex: 1;
+    margin: 0;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* Light mode: labels should be dark */
+:root[style*="--settings-bg-color: #f9f9f9"] .settings-menu-item label,
+:root[style*="--settings-bg-color: #f5f7f8"] .settings-menu-item label {
+    color: #0f0f0f;
+}
+
+/* Keep Apple Switch labels compact */
+.settings-menu-item label.apple-switch {
+    flex: 0 0 auto;
+}
+
+/* Settings Divider */
+.settings-divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 5px 0;
+}
+
+:root[style*="--settings-bg-color: #1c1c1c"] .settings-divider {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Section Title in Settings */
+.settings-section-title {
+    padding: 8px 12px 4px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--settings-inactive-color);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Light mode: section titles should be dark */
+:root[style*="--settings-bg-color: #f9f9f9"] .settings-section-title,
+:root[style*="--settings-bg-color: #f5f7f8"] .settings-section-title {
+    color: #0f0f0f;
+}
+
+/* Apple-like Toggle Switch */
+.apple-switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 26px;
+    flex-shrink: 0;
+}
+
+.apple-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.apple-switch-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(100, 100, 108, 1);
+    transition: 0.2s;
+    border-radius: 26px;
+}
+
+.apple-switch-slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    transition: 0.2s;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.apple-switch input:checked + .apple-switch-slider {
+    background-color: var(--settings-accent-color);
+}
+
+.apple-switch input:checked + .apple-switch-slider:before {
+    transform: translateX(18px);
+}
+
+/* Dark mode switch background */
+:root[style*="--settings-bg-color: #1c1c1c"] .apple-switch-slider {
+    background-color: rgba(120, 120, 128, 1);
+}
+
+/* Single-line Input Field (Glass Style) */
+.settings-input {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 13px;
+    color: var(--settings-text-color);
+    outline: none;
+    transition: all 0.2s ease;
+    min-width: 0;
+    max-width: 200px;
+    box-sizing: border-box;
+}
+
+.settings-input:focus {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--settings-accent-color);
+}
+
+.settings-input::placeholder {
+    color: var(--settings-inactive-color);
+    opacity: 0.6;
+}
+
+/* Light mode: placeholders should be dark */
+:root[style*="--settings-bg-color: #f9f9f9"] .settings-input::placeholder,
+:root[style*="--settings-bg-color: #f5f7f8"] .settings-input::placeholder {
+    color: #0f0f0f;
+    opacity: 0.5;
+}
+
+:root[style*="--settings-bg-color: #1c1c1c"] .settings-input {
+    background: rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Single-line Dropdown (Glass Style) */
+.settings-select {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    padding: 6px 28px 6px 10px;
+    font-size: 13px;
+    color: var(--settings-text-color);
+    outline: none;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8"><path fill="%23ffffff" opacity="0.7" d="M1.41 0L6 4.59L10.59 0L12 1.41L6 7.41L0 1.41L1.41 0z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 10px;
+    min-width: 0;
+    max-width: 200px;
+    box-sizing: border-box;
+}
+
+:root[style*="--settings-bg-color: #1c1c1c"] .settings-select {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.settings-select option {
+    background: var(--settings-bg-color);
+    color: var(--settings-text-color);
+}
+
+/* Single-line File Input */
+.settings-file-input-wrapper {
+    flex: 1;
+    position: relative;
+    min-width: 0;
+}
+
+.settings-file-input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.settings-file-label {
+    display: block;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 13px;
+    color: var(--settings-text-color);
+    max-width: 200px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-sizing: border-box;
+}
+
+.settings-file-label:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+:root[style*="--settings-bg-color: #1c1c1c"] .settings-file-label {
+    background: rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Color Picker */
+.settings-color-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    max-width: 200px;
+}
+
+.settings-color-group .settings-input {
+    flex: 1;
+    min-width: 80px;
+}
+
+.settings-color-picker {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    min-height: 32px;
+    max-width: 32px;
+    max-height: 32px;
+    padding: 2px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+    box-sizing: border-box;
+}
+
+.settings-color-picker::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+.settings-color-picker::-webkit-color-swatch {
+    border: none;
+    border-radius: 6px;
+}
+
+.settings-color-picker::-moz-color-swatch {
+    border: none;
+    border-radius: 6px;
+}
+
+.settings-color-picker:hover {
+    border-color: var(--settings-accent-color);
+    box-shadow: 0 0 10px rgba(var(--settings-accent-color-rgb, 100, 150, 255), 0.3);
+}
+
+:root[style*="--settings-bg-color: #1c1c1c"] .settings-color-picker {
+    background: rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Single-line Slider */
+.settings-slider-wrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    max-width: 200px;
+}
+
+.settings-slider {
+    flex: 1;
+    height: 4px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: linear-gradient(
+        to right,
+        var(--settings-accent-color) 0%,
+        var(--settings-accent-color) var(--slider-fill, 0%),
+        rgba(255, 255, 255, 0.2) var(--slider-fill, 0%),
+        rgba(255, 255, 255, 0.2) 100%
+    );
+    outline: none;
+    border-radius: 2px;
+    min-width: 0;
+}
+
+.settings-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background: white;
+    cursor: pointer;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.settings-slider::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    background: white;
+    cursor: pointer;
+    border-radius: 50%;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.settings-slider::-moz-range-track {
+    height: 4px;
+    background: linear-gradient(
+        to right,
+        var(--settings-accent-color) 0%,
+        var(--settings-accent-color) var(--slider-fill, 0%),
+        rgba(255, 255, 255, 0.2) var(--slider-fill, 0%),
+        rgba(255, 255, 255, 0.2) 100%
+    );
+    border-radius: 2px;
+    border: none;
+}
+
+.settings-slider-value {
+    font-size: 13px;
+    color: var(--settings-text-color);
+    min-width: 35px;
+    text-align: right;
+}
+
+/* Settings Button (for actions like "Add App", "Search Iconify") */
+.settings-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    color: var(--settings-text-color);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    text-align: center;
+}
+
+.settings-button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--settings-accent-color);
+}
+
+:root[style*="--settings-bg-color: #1c1c1c"] .settings-button {
+    background: rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Split Button Container (Back/Save) */
+.settings-button-split {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+    padding: 0 10px;
+}
+
+.settings-button-back,
+.settings-button-save {
+    flex: 1;
+    padding: 8px 12px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--settings-text-color);
+    transition: all 0.15s ease;
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.settings-button-back:hover {
+    border-color: var(--settings-close-border, #d78181);
+    box-shadow: 0 0 8px rgba(230, 90, 117, 0.4);
+}
+
+.settings-button-save:hover {
+    border-color: var(--settings-accent-color);
+    box-shadow: 0 0 8px color-mix(in srgb, var(--settings-accent-color) 40%, transparent);
+}
+
+:root[style*="--settings-bg-color: #1c1c1c"] .settings-button-back,
+:root[style*="--settings-bg-color: #1c1c1c"] .settings-button-save {
+    background: rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* App/Link List Item */
+#appsList {
+    margin-bottom: 11px;
+    margin-top: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 0px 6px 0px 2px;
+    max-height: 138px;
+    overflow-y: auto;
+}
+
+#linksList {
+    margin-bottom: 13px;
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 0px 6px 0px 2px;
+    max-height: 138px;
+    overflow-y: auto;
+}
+
+/* Cloud layouts list container (MERGED - was defined twice) */
+.cloud-layouts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 12px;
+    margin-bottom: 16px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+/* Compact bar settings tiles row */
+.input-bar-settings-tiles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 6px;
+}
+
+.input-bar-settings-tile {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 10px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    color: var(--settings-text-color, rgba(255,255,255,0.85));
+    font-size: 0;
+}
+
+.input-bar-settings-tile:hover {
+    background: color-mix(in srgb, var(--settings-accent-color) 12%, transparent);
+    border-color: color-mix(in srgb, var(--settings-accent-color) 35%, transparent);
+}
+
+.input-bar-settings-tile:active {
+    transform: scale(0.96);
+}
+
+.input-bar-settings-tile.disabled {
+    opacity: 0.35;
+    cursor: default;
+    pointer-events: none;
+}
+
+.input-bar-settings-tile-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.input-bar-settings-tile-gear {
+    font-size: 12px;
+    flex-shrink: 0;
+    opacity: 0.45;
+}
+
+.input-bar-settings-tile:hover .input-bar-settings-tile-gear {
+    opacity: 0.8;
+}
+
+:root[style*="--settings-bg-color: #1c1c1c"] .input-bar-settings-tile {
+    background: rgba(0, 0, 0, 0.25);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.settings-list-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+}
+
+:root[style*="--settings-bg-color: #1c1c1c"] .settings-list-item {
+    background: rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.settings-list-item-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.settings-list-item-name {
+    flex: 1;
+    font-size: 13px;
+    color: var(--settings-text-color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 500;
+}
+
+.settings-list-item-btn {
+    background: transparent;
+    border: none;
+    color: var(--settings-text-color);
+    cursor: pointer;
+    padding: 6px 2px;
+    font-size: 12px;
+    font-weight: 500;
+    opacity: 0.7;
+    transition: all 0.15s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    white-space: nowrap;
+}
+
+.settings-list-item-btn:hover {
+    opacity: 1;
+}
+
+/* Load button - accent color */
+.layout-load-btn {
+    color: var(--settings-accent-color);
+    border: 1px solid var(--settings-accent-color);
+    opacity: 1;
+}
+
+.layout-load-btn:hover {
+    background: var(--settings-accent-color);
+    color: #ffffff;
+}
+
+/* Overwrite button - yellow */
+.layout-overwrite-btn {
+    color: #f0ad4e;
+    border: 1px solid #f0ad4e;
+    opacity: 1;
+}
+
+.layout-overwrite-btn:hover {
+    background: #f0ad4e;
+    color: #ffffff;
+}
+
+/* Delete button - red */
+.layout-delete-btn {
+    color: var(--settings-close-border, #d78181);
+    border: 1px solid var(--settings-close-border, #d78181);
+    opacity: 1;
+    padding: 6px 12px;
+}
+
+.layout-delete-btn:hover {
+    background: var(--settings-close-border, #d78181);
+    color: #ffffff;
+}
+
+/* Tip text */
+.settings-tip {
+    padding: 0px 12px 4px 12px;
+    font-size: 12px;
+    color: var(--settings-inactive-color);
+    font-style: italic;
+}

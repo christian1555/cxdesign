@@ -1,0 +1,357 @@
+/* ============================================
+   MODAL & SETTINGS SYSTEM
+   ============================================ */
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    max-width: 700px;
+    width: 90%;
+    height: 600px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    color: var(--settings-text-color);
+    font-family: inherit;
+}
+
+/* Dark mode variant for modal */
+:root[style*="--settings-bg-color: #1c1c1c"] .modal-content {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Light mode variant */
+:root[style*="--settings-bg-color: #f9f9f9"] .modal-content,
+:root[style*="--settings-bg-color: #f5f7f8"] .modal-content {
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+:root[style*="--settings-bg-color: #f9f9f9"] .modal-content label,
+:root[style*="--settings-bg-color: #f9f9f9"] .modal-content .modal-tab,
+:root[style*="--settings-bg-color: #f9f9f9"] .modal-content .settings-menu-item,
+:root[style*="--settings-bg-color: #f9f9f9"] .modal-content h3,
+:root[style*="--settings-bg-color: #f9f9f9"] .modal-content input,
+:root[style*="--settings-bg-color: #f5f7f8"] .modal-content label,
+:root[style*="--settings-bg-color: #f5f7f8"] .modal-content .modal-tab,
+:root[style*="--settings-bg-color: #f5f7f8"] .modal-content .settings-menu-item,
+:root[style*="--settings-bg-color: #f5f7f8"] .modal-content h3,
+:root[style*="--settings-bg-color: #f5f7f8"] .modal-content input {
+    color: var(--settings-text-color);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.modal-body {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+.modal-sidebar {
+    width: 200px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 0;
+    border-right: 1px solid rgba(255, 255, 255, 0.15);
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-tab {
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--settings-text-color);
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: left;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    opacity: 0.7;
+}
+
+/* Add top margin to first tab to avoid corner clipping */
+.modal-tab:first-child {
+    margin-top: 20px;
+}
+
+.modal-tab:last-child {
+    border-bottom: none;
+}
+
+.modal-tab:hover {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.modal-tab.active {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--settings-text-color);
+    font-weight: 600;
+    border-left: 3px solid var(--settings-accent-color);
+    padding-left: 17px;
+    margin-top: -1px;
+    padding-top: 13px;
+}
+
+/* Keep the top margin for first tab even when active */
+.modal-tab:first-child.active {
+    margin-top: 19px;
+}
+
+:root[style*="--settings-bg-color: #1c1c1c"] .modal-tab {
+    border-bottom-color: rgba(255, 255, 255, 0.05);
+}
+
+:root[style*="--settings-bg-color: #1c1c1c"] .modal-tab.active {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.modal-main {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 16px 20px;
+}
+
+.modal-footer button {
+    padding: 10px 24px;
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 10px;
+    height: 40px;
+    min-width: 100px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+}
+
+.modal-header {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: var(--settings-text-color);
+}
+
+.modal-section h3 {
+    font-size: 16px;
+    font-family: inherit;
+    margin-bottom: 12px;
+    color: var(--settings-text-color);
+    font-weight: 600;
+}
+
+/* Collapsible sections */
+.collapsible-header {
+    cursor: pointer;
+    user-select: none;
+    margin-bottom: 15px;
+}
+
+.collapsible-header:hover {
+    opacity: 0.8;
+}
+
+.collapsed .collapsible-header {
+    margin-bottom: 0;
+}
+
+.collapse-icon {
+    display: inline-block;
+    margin-right: 8px;
+    transition: transform 0.2s ease;
+    font-size: 12px;
+}
+
+.collapsed .collapse-icon {
+    transform: rotate(-90deg);
+}
+
+.collapsible-content {
+    display: grid;
+    grid-template-rows: 1fr;
+    opacity: 1;
+    visibility: visible;
+    transition: grid-template-rows 0.2s ease, opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.collapsed .collapsible-content {
+    grid-template-rows: 0fr;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.collapsible-content > * {
+    overflow: hidden;
+}
+
+.modal-section p {
+    color: var(--settings-inactive-color);
+    line-height: normal;
+    margin-bottom: 10px;
+}
+
+/* Legacy input-group styles - kept for backward compatibility with main settings modal */
+.modal-main .input-group {
+    margin-bottom: 20px;
+}
+
+.modal-main .input-group-no-margin {
+    margin-bottom: 0;
+}
+
+.modal-main .input-group label {
+    display: block;
+    font-size: 13px;
+    font-family: inherit;
+    margin-bottom: 8px;
+    color: var(--settings-text-color);
+    font-weight: 500;
+}
+
+.modal-main .input-group label:has(input[type="checkbox"]) {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.modal-main .input-group input[type="checkbox"] {
+    width: auto;
+    padding: 0;
+    margin: 0;
+}
+
+/* Base input-group styling */
+.modal-main .input-group input[type="file"],
+.modal-main .input-group input[type="color"] {
+    width: 100%;
+    padding: 6px 10px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    font-size: 13px;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--settings-text-color);
+}
+
+/* ============================================
+   CONSISTENT DROPDOWN/SELECT STYLING
+   ============================================ */
+
+/* Dark mode dropdown arrow */
+:root[style*="--settings-bg-color: #1c1c1c"] .input-group select,
+:root[style*="--settings-bg-color: #1c1c1c"] .modal-main select,
+:root[style*="--settings-bg-color: #1c1c1c"] .auth-form select,
+:root[style*="--settings-bg-color: #1c1c1c"] .widget-settings-popup select {
+    background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8"><path fill="white" fill-opacity="0.7" d="M1.41 0L6 4.59L10.59 0L12 1.41L6 7.41L0 1.41L1.41 0z"/></svg>');
+}
+
+.modal-main .input-group input[type="range"] {
+    padding: 0;
+    height: 4px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: rgba(255, 255, 255, 0.2);
+    outline: none;
+    border-radius: 2px;
+}
+
+.modal-main .input-group input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background: #ffffff;
+    cursor: pointer;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.modal-main .input-group input[type="range"]::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    background: #ffffff;
+    cursor: pointer;
+    border-radius: 50%;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.modal-main .input-group input[type="file"] {
+    padding: 8px;
+}
+
+.modal-panel {
+    display: none;
+    width: 100%;
+    min-height: 400px;
+}
+
+.modal-panel.active {
+    display: block !important;
+    visibility: visible !important;
+}
+
+/* Ensure Apps tab form is visible */
+#addSingleAppForm {
+    display: block !important;
+    background: transparent !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+#addSingleAppForm input,
+#addSingleAppForm button,
+#addSingleAppForm label {
+    display: block;
+}
+
+/* Apps panel - use theme variables instead of hardcoded white */
+#apps.modal-panel {
+    display: none;
+}
+
+#apps.modal-panel.active {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}

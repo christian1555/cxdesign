@@ -1,0 +1,175 @@
+/* scroll fade */
+.vis {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.vis.on {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* stagger */
+.s1 { transition-delay: 0.08s; }
+.s2 { transition-delay: 0.19s; }
+.s3 { transition-delay: 0.32s; }
+.s4 { transition-delay: 0.42s; }
+
+
+/* keyframes */
+
+@keyframes hero-glow {
+  0% { opacity: 0.15; transform: translate(-50%, -50%) scale(0.9); }
+  100% { opacity: 0.35; transform: translate(-50%, -50%) scale(1.1); }
+}
+
+@keyframes scroll-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+@keyframes vline-fall {
+  0%   { transform: translateY(-180px); opacity: 0; }
+  10%  { opacity: 0.28; }
+  90%  { opacity: 0.28; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
+
+@keyframes led-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+@keyframes wip-ring {
+  0%, 100% { box-shadow: 0 0 0 rgba(0, 255, 224, 0); }
+  50% { box-shadow: 0 0 30px rgba(0, 255, 224, 0.08); }
+}
+
+
+/* tablet */
+@media (max-width: 900px) {
+  .landing-split {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .landing-text { align-items: center; }
+  .landing-text .overline { justify-content: center; }
+  .landing-text .tags { justify-content: center; }
+  .landing-text .intro { margin: 0 auto; }
+  .landing-portrait { order: -1; }
+  .portrait-frame {
+    width: 180px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+  }
+
+  .komp-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .projekt-split,
+  .projekt-split.flip {
+    grid-template-columns: 1fr;
+    direction: ltr;
+  }
+  .projekt-split > * { direction: ltr; }
+
+  .projekt-img { height: 40vh; }
+
+  .projekt-split {
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .fade-edge,
+  .projekt-split.flip .fade-edge {
+    background: linear-gradient(to bottom, transparent 60%, var(--bg) 100%);
+  }
+
+  /* demo-knap: centreres inden for projekt-img i stedet for viewport */
+  .demo-controls {
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .projekt.demo-mobile .demo-controls,
+  .projekt.demo-full .demo-controls {
+    top: 0;
+    transform: translate(calc(-50% - 2.1rem), 1.75rem);
+  }
+
+  /* demo-full: stablet layout → lad iframe fylde hele viewport, skjul info */
+  .projekt.demo-full .projekt-split,
+  .projekt.demo-full .projekt-split.flip {
+    grid-template-columns: 1fr;
+    grid-template-rows: 100vh 0fr;
+    min-height: 100vh;
+  }
+  .projekt.demo-full .projekt-img {
+    height: 100vh;
+  }
+
+  .page-dots { display: none; }
+
+  .feature-tags {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .proces-code-info {
+    grid-template-columns: 1fr;
+  }
+
+  .foto-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* mobil */
+@media (max-width: 600px) {
+  .tags { gap: 0.4rem; }
+
+  .tag {
+    font-size: 0.55rem;
+    padding: 0.35rem 0.75rem;
+  }
+
+  .lang-picker {
+    top: 1rem;
+    left: 1rem;
+  }
+
+  .projekt-info { padding: 2rem; }
+
+  .proces-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .proces-tab {
+    padding: 0.75rem 1rem;
+    font-size: 0.58rem;
+  }
+
+  /* fix: safari iOS regner 100vh forkert pga. adresselinjen, dvs. bunden bliver cuttet */
+  section { min-height: -webkit-fill-available; }
+
+  /* demo-knapper: lidt mindre på små skærme så de ikke fylder for meget */
+  .demo-main,
+  .demo-expand {
+    font-size: 0.8rem;
+  }
+  .demo-main {
+    height: 3.1rem;
+    min-width: 11rem;
+    padding: 0 1.2rem;
+  }
+  .demo-expand {
+    width: 3.1rem;
+    height: 3.1rem;
+    left: calc(100% + 0.45rem);
+  }
+  .projekt.demo-mobile .demo-controls,
+  .projekt.demo-full .demo-controls {
+    transform: translate(calc(-50% - 1.8rem), 1.25rem);
+  }
+}

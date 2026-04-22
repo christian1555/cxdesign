@@ -1,0 +1,395 @@
+/* ============================================
+   CHATBOT WIDGET
+   ============================================ */
+
+.widget.chatbot-widget {
+    /* Critical overrides to prevent double border and allow overflow */
+    overflow: visible !important;
+    z-index: 10;
+    -webkit-backface-visibility: visible;
+    backface-visibility: visible;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+
+    /* Visual styling - match search widget exactly */
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: text;
+}
+
+/* Chatbot container */
+.chatbot-widget-container {
+    position: relative;
+    width: 100%;
+    height: clamp(42px, 4.2vw, 48px);
+    display: flex;
+    align-items: center;
+}
+
+/* Expanded chat overlay */
+.chatbot-expanded {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    right: 0;
+    max-height: 420px;
+    min-height: 220px;
+    z-index: 9999;
+    animation: fadeInUp 0.15s ease-out;
+    overflow: hidden;
+    border-radius: var(--icon-radius);
+}
+
+/* Overlay variant for chatbot expanded (positioned on body, outside widget) */
+.chatbot-expanded-overlay {
+    position: fixed;
+    z-index: 10000;
+    right: auto;
+}
+
+/* Expand downwards variant for chatbot */
+.chatbot-expanded.expand-upwards {
+    bottom: auto;
+    top: 100%;
+    animation: fadeInDown 0.15s ease-out;
+}
+
+/* Blur background layer - inset to sit inside the border */
+.chatbot-blur-layer {
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    right: 1px;
+    bottom: 1px;
+    background: var(--widget-bg-color);
+    backdrop-filter: blur(var(--widget-bg-blur));
+    -webkit-backdrop-filter: blur(var(--widget-bg-blur));
+    border-radius: calc(var(--icon-radius) - 1px);
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Border layer - sits on top with no background, only border */
+.chatbot-border-layer {
+    position: absolute;
+    inset: 0;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--icon-radius);
+    z-index: 2;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+}
+
+.chatbot-expanded .chatbot-border-layer {
+    flex-direction: column;
+    align-items: stretch;
+    overflow: hidden;
+    /* padding + flex + overflow handled by .suggestion-box class in JS */
+}
+
+/* Input field */
+.cb-input {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 8px 50px 8px 14px;
+    background: transparent;
+    border: none;
+    color: var(--widget-text-color);
+    font-size: clamp(14px, 1.2vw, 16px);
+    outline: none;
+    cursor: text;
+    z-index: 3;
+    pointer-events: auto;
+}
+
+.cb-input::placeholder {
+    color: var(--widget-text-color);
+    opacity: 0.5;
+}
+
+.edit-mode .cb-input {
+    cursor: grab;
+    pointer-events: none;
+}
+
+.edit-mode .cb-input:active {
+    cursor: grabbing;
+}
+
+/* Messages container in expanded view */
+.cb-messages {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 3;
+    pointer-events: auto;
+    /* overflow + padding + scrollbar: all handled by .suggestion-scroller */
+}
+
+/* Message bubbles */
+.cb-bubble {
+    max-width: 85%;
+    border: 1px solid var(--widget-border, rgba(255, 255, 255, 0.2));
+    border-radius: 12px;
+    padding: 10px 14px;
+    backdrop-filter: blur(6px);
+    word-break: break-word;
+    font-size: 13px;
+    line-height: normal;
+    color: var(--widget-text-color);
+}
+
+.cb-bubble.cb-user {
+    align-self: flex-end;
+    background: color-mix(in srgb, var(--settings-accent-color) 25%, transparent);
+    white-space: pre-wrap;
+}
+
+.cb-bubble.cb-assistant {
+    align-self: flex-start;
+    background: rgba(255, 255, 255, 0.12);
+    white-space: normal;
+}
+
+/* Markdown styles for chatbot assistant messages */
+.cb-bubble.cb-assistant p {
+    margin: 0 0 12px;
+}
+
+.cb-bubble.cb-assistant p:last-child {
+    margin: 0;
+}
+
+.cb-bubble.cb-assistant h1,
+.cb-bubble.cb-assistant h2,
+.cb-bubble.cb-assistant h3,
+.cb-bubble.cb-assistant h4,
+.cb-bubble.cb-assistant h5,
+.cb-bubble.cb-assistant h6 {
+    margin: 14px 0 8px;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.cb-bubble.cb-assistant h1:first-child,
+.cb-bubble.cb-assistant h2:first-child,
+.cb-bubble.cb-assistant h3:first-child {
+    margin-top: 0;
+}
+
+.cb-bubble.cb-assistant code {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 0.9em;
+}
+
+.cb-bubble.cb-assistant pre {
+    margin: 8px 0;
+    overflow-x: auto;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.cb-bubble.cb-assistant pre code {
+    display: block;
+    padding: 12px;
+    background: transparent;
+    white-space: pre;
+    overflow: auto;
+    border-radius: 0;
+}
+
+.cb-bubble.cb-assistant blockquote {
+    border-left: 3px solid var(--widget-border, rgba(255, 255, 255, 0.4));
+    margin: 8px 0;
+    padding: 8px 12px;
+    opacity: 0.8;
+}
+
+.cb-bubble.cb-assistant a {
+    color: var(--settings-accent-color);
+    text-decoration: none;
+    border-bottom: 1px solid color-mix(in srgb, var(--settings-accent-color) 30%, transparent);
+    transition: border-color 0.2s ease;
+}
+
+.cb-bubble.cb-assistant a:hover {
+    border-bottom-color: color-mix(in srgb, var(--settings-accent-color) 80%, transparent);
+}
+
+.cb-bubble.cb-assistant ul,
+.cb-bubble.cb-assistant ol {
+    margin: 8px 0;
+    padding-left: 24px;
+}
+
+.cb-bubble.cb-assistant li {
+    margin: 4px 0;
+}
+
+.cb-bubble.cb-assistant .task-list-item {
+    list-style: none;
+    margin-left: -24px;
+    padding-left: 24px;
+}
+
+.cb-bubble.cb-assistant .task-list-item input {
+    margin-right: 8px;
+}
+
+.cb-bubble.cb-assistant table {
+    border-collapse: collapse;
+    margin: 8px 0;
+    width: 100%;
+    font-size: 0.95em;
+}
+
+.cb-bubble.cb-assistant th,
+.cb-bubble.cb-assistant td {
+    border: 1px solid var(--widget-border, rgba(255, 255, 255, 0.2));
+    padding: 6px 10px;
+    text-align: left;
+}
+
+.cb-bubble.cb-assistant th {
+    background: rgba(0, 0, 0, 0.15);
+    font-weight: 600;
+}
+
+/* Spoiler support */
+.cb-spoiler {
+    background: rgba(0, 0, 0, 0.6);
+    color: transparent;
+    border-radius: 4px;
+    padding: 0 4px;
+    cursor: pointer;
+    transition: color 0.15s ease;
+    user-select: none;
+}
+
+.cb-spoiler::selection {
+    background: transparent;
+}
+
+.cb-spoiler.revealed {
+    color: var(--widget-text-color);
+    background: rgba(0, 0, 0, 0.3);
+}
+
+/* Floating controls (provider/model dropdowns) — always visible at low opacity */
+.cb-floating-controls {
+    position: absolute;
+    right: 52px;
+    bottom: 4px;
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    z-index: 4;
+    opacity: 0.07;
+    transition: opacity 0.2s ease;
+    pointer-events: auto;
+}
+
+.cb-floating-controls:hover {
+    opacity: 1;
+}
+
+.cb-floating-controls select {
+    background: transparent;
+    border: 1px solid var(--widget-border, rgba(255, 255, 255, 0.15));
+    border-radius: 6px;
+    padding: 2px 6px;
+    color: inherit;
+    cursor: pointer;
+    font-size: 9px;
+    outline: none;
+}
+
+.cb-provider {
+    min-width: 60px;
+}
+
+.cb-model {
+    min-width: 90px;
+}
+
+/* Size control buttons */
+.cb-size-controls {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    z-index: 5;
+    pointer-events: auto;
+}
+
+/* When expanding downwards (expand-upwards class), buttons go to top */
+.chatbot-expanded.expand-upwards .cb-size-controls {
+    bottom: auto;
+    top: 8px;
+}
+
+.cb-size-btn {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--widget-border, rgba(255, 255, 255, 0.2));
+    border-radius: 6px;
+    padding: 4px 8px;
+    color: var(--widget-text-color);
+    cursor: pointer;
+    font-size: 14px;
+    line-height: normal;
+    opacity: 0.15;
+    transition: all 0.2s ease;
+    font-weight: bold;
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* When hovering over the controls container, make all buttons fully visible */
+.cb-size-controls:hover .cb-size-btn {
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.5);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.cb-size-btn:active {
+    transform: scale(0.95);
+}
+
+.cb-size-btn.cb-clear {
+    padding: 4px 7px;
+}
+
+.cb-size-btn.cb-clear .iconify {
+    font-size: 14px;
+}
+
+/* Default color overrides */
+.widget.chatbot-widget.default-color .chatbot-blur-layer {
+    background: rgba(255, 255, 255, 0.2) !important;
+}
+
+.widget.chatbot-widget.default-color .cb-input {
+    color: var(--widget-text-color);
+}
+
+.widget.chatbot-widget.default-color .cb-input::placeholder {
+    color: var(--widget-text-color);
+    opacity: 0.5;
+}

@@ -1,0 +1,307 @@
+/* ============================================
+   BASE STYLES - Reset, Body, Container, Variables
+   ============================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background-attachment: fixed;
+    background-size: var(--bg-size, contain);
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    position: relative;
+}
+
+/* Background overlay for darkness control */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, var(--bg-overlay, 0));
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Background blur wrapper */
+body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    backdrop-filter: blur(var(--bg-blur, 0px));
+    -webkit-backdrop-filter: blur(var(--bg-blur, 0px));
+    pointer-events: none;
+    z-index: 0;
+}
+
+html, .container {
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+}
+
+.container {
+    position: relative;
+    z-index: 1;
+}
+
+.bottom-bar {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    gap: 15px;
+    z-index: 50;
+    opacity: 0.3;
+    transition: opacity 0.3s ease;
+}
+
+.bottom-bar:hover {
+    opacity: 1;
+}
+
+.bottom-bar.hide-when-not-hovered {
+    opacity: 0;
+}
+
+.bottom-bar.hide-when-not-hovered:hover {
+    opacity: 1;
+}
+
+hr {
+  height: 2px;
+  border: none;
+  background-color: var(--settings-accent-color);
+  margin-bottom: 20px;
+  opacity: 30%;
+}
+
+/* Edit Mode Tip Banner */
+.edit-mode-tip {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    background: var(--widget-bg-color);
+    backdrop-filter: blur(var(--widget-bg-blur));
+    -webkit-backdrop-filter: blur(var(--widget-bg-blur));
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    color: var(--widget-text-color);
+    font-size: 14px;
+    font-weight: 500;
+    z-index: 100;
+    max-width: 90%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    animation: slideDown 0.3s ease-out;
+}
+
+.edit-mode-tip .iconify {
+    color: var(--widget-icon-color);
+    flex-shrink: 0;
+    opacity: 0.9;
+}
+
+.edit-mode-tip .tip-text {
+    line-height: normal;
+    flex: 1;
+}
+
+.edit-mode-tip .tip-close-btn {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 6px;
+    color: var(--widget-text-color);
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 400;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+    margin-left: 8px;
+}
+
+.edit-mode-tip .tip-close-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(1.05);
+}
+
+.edit-mode-tip .tip-close-btn:active {
+    transform: scale(0.95);
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+/* Responsive sizing for smaller screens */
+@media (max-width: 800px) {
+    .edit-mode-tip {
+        font-size: 13px;
+        padding: 10px 16px;
+        top: 15px;
+    }
+}
+
+@media (max-width: 600px) {
+    .edit-mode-tip {
+        font-size: 12px;
+        padding: 8px 14px;
+        top: 10px;
+        gap: 8px;
+    }
+}
+
+.btn {
+    background: var(--widget-bg-color);
+    backdrop-filter: blur(var(--widget-bg-blur));
+    -webkit-backdrop-filter: blur(var(--widget-bg-blur));
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: var(--icon-radius);
+    color: var(--widget-text-color);
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 500;
+    transition: background 0.2s ease, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    background-clip: padding-box;
+}
+
+.btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.08);
+}
+
+.btn:active {
+    transform: scale(0.92);
+    transition-duration: 0.12s;
+}
+
+.btn .iconify {
+    color: var(--widget-icon-color);
+}
+
+/* ============================================
+   INTERACTIVE SPRING ANIMATION UTILITY
+   Apply to any clickable element for
+   Apple-style spring hover feedback
+   ============================================ */
+
+.tt-interactive {
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    will-change: transform;
+}
+
+.tt-interactive:hover {
+    transform: scale(1.08);
+}
+
+.tt-interactive:active {
+    transform: scale(0.92);
+    transition-duration: 0.12s;
+}
+
+/* ============================================
+   CSS VARIABLES & ROOT CONFIGURATION
+   ============================================ */
+
+/* Responsive Grid (iOS-like sizing - boxes taller than wide) */
+:root {
+    /* iOS style: boxes are ~20% taller than wide */
+    --icon-width: 75px;
+    --icon-height: 90px;
+    --icon-gap-x: 10px;
+    --icon-gap-y: 10px;
+    --icon-radius: 16px;
+    --icon-opacity: 1;
+    --icon-fit: cover;
+    --bg-overlay: 0;
+    --bg-blur: 0px;
+    --bg-size: contain;
+    /* Widget and Apps Styling Variables */
+    --widget-bg-color: rgba(255, 255, 255, 0.15);
+    --widget-bg-opacity: 0.15;
+    --widget-bg-blur: 10px;
+    --widget-icon-color: #ffffff;
+    --widget-text-color: #ffffff;
+    --widget-border: rgba(255, 255, 255, 0.2);
+    --widget-scrollbar-thumb: rgba(255, 255, 255, 0.1);
+    --widget-scrollbar-thumb-hover: rgba(255, 255, 255, 0.3);
+    /* Settings Modal Styling Variables */
+    --settings-bg-color: #f9f9f9;
+    --settings-text-color: #0f0f0f;
+    --settings-accent-color: #81C3D7;
+    --settings-close-bg: #d78181;
+    --settings-close-text: #0f0f0f;
+    --settings-close-border: #d78181;
+    --settings-inactive-color: #999999;
+    --settings-input-bg: #ffffff;
+    --settings-input-border: #ddd;
+    --settings-border-color: rgba(0, 0, 0, 0.1);
+    --settings-save-bg: rgba(255, 255, 255, 0.05);
+    --settings-save-border: rgba(255, 255, 255, 0.15);
+}
+
+/* Responsive breakpoints - consolidated */
+@media (min-width: 1921px) { :root { --icon-width: 85px; --icon-height: 102px; --icon-gap-x: 12px; --icon-gap-y: 12px; } }
+@media (max-width: 1920px) { :root { --icon-width: 75px; --icon-height: 90px; --icon-gap-x: 10px; --icon-gap-y: 10px; } }
+@media (max-width: 1600px) { :root { --icon-width: 70px; --icon-height: 84px; } }
+@media (max-width: 1400px) { :root { --icon-width: 68px; --icon-height: 82px; --icon-gap-x: 9px; --icon-gap-y: 9px; } }
+@media (max-width: 1200px) { :root { --icon-width: 65px; --icon-height: 78px; --icon-gap-x: 8px; --icon-gap-y: 8px; } }
+@media (max-width: 1000px) { :root { --icon-width: 62px; --icon-height: 74px; } }
+@media (max-width: 800px) { :root { --icon-width: 60px; --icon-height: 72px; } }
+@media (max-width: 600px) { :root { --icon-width: 58px; --icon-height: 70px; --icon-gap-x: 7px; --icon-gap-y: 7px; } }
+
+/* Shared keyframe animations */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

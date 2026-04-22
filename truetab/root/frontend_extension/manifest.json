@@ -1,0 +1,41 @@
+{
+  "manifest_version": 3,
+  "name": "TrueTab",
+  "description": "Custom new tab page with widgets",
+  "version": "1.0.0",
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "chrome_url_overrides": {
+    "newtab": "truetab_main.html"
+  },
+  "permissions": [
+    "history",
+    "bookmarks",
+    "storage"
+  ],
+  "host_permissions": [
+    "http://127.0.0.1:3000/*",
+    "http://localhost:8000/*",
+    "https://duckduckgo.com/*",
+    "https://www.google.com/*",
+    "https://www.bing.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "TrueTab"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "truetab@yourowndomain.com",
+      "strict_min_version": "109.0"
+    }
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://*.run.app;"
+  }
+}

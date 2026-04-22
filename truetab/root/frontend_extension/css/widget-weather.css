@@ -1,0 +1,178 @@
+/* ============================================
+   WEATHER WIDGET
+   ============================================ */
+
+.widget[id*="weather"] .widget-header {
+    text-align: center;
+    width: 100%;
+    font-size: clamp(10px, 0.95vw, 12px);
+    margin-top: -2.5px;
+}
+
+.widget[id*="weather"].span-2x1 .widget-header {
+    margin-bottom: 0;
+}
+
+.widget[id*="weather"] .widget-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    justify-content: start;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    padding: 8px;
+}
+
+.widget[id*="weather"] .widget-header + .widget-content {
+    padding: 6px;
+}
+
+/* Compact layout (2x1) */
+.weather-compact {
+    padding: 2px !important;
+    gap: 1px;
+    justify-content: center;
+    margin: -2px;
+}
+
+.weather-compact-top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    flex-shrink: 0;
+}
+
+.compact-title {
+    font-size: 10px;
+    font-weight: 600;
+    opacity: 0.9;
+    text-transform: uppercase;
+    line-height: normal;
+}
+
+.compact-icon {
+    font-size: 10px !important;
+    opacity: 0.9;
+    line-height: normal;
+}
+
+.compact-temp {
+    font-size: 10px;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.compact-desc {
+    display: none;
+}
+
+.compact-extra {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    font-size: 7px;
+    opacity: 0.9;
+    margin-top: auto;
+}
+
+/* Wide layout (3x2+) */
+.weather-wide {
+    gap: 6px;
+}
+
+.weather-wide.has-title {
+    gap: 6px;
+}
+
+.weather-wide.no-title {
+    padding: 8px;
+    gap: 10px;
+}
+
+/* 2x2 layout */
+.weather-2x2 {
+    gap: 6px;
+    justify-content: space-between;
+}
+
+.weather-2x2.has-title {
+    gap: 6px;
+}
+
+.weather-2x2.no-title {
+    padding: 8px;
+    gap: 10px;
+}
+
+/* Grid layout for 7 and 14 day forecasts */
+.forecast-grid {
+    width: 100%;
+}
+
+.forecast-grid .wf-day {
+    min-width: 0 !important;
+}
+
+/* Weather Widget */
+.weather-temp {
+    font-weight: 600;
+}
+
+.weather-desc {
+    opacity: 0.85;
+}
+
+.weather-icon {
+    flex-shrink: 0;
+    line-height: normal;
+    display: flex;
+    align-items: center;
+}
+
+.weather-feels-like,
+.weather-humidity,
+.weather-wind {
+    opacity: 0.9;
+    margin-right: 16px;
+}
+
+.weather-feels-like span,
+.weather-humidity span,
+.weather-wind span {
+    font-weight: 500;
+}
+
+/* Weather Forecast Strip */
+.weather-forecast-strip {
+    width: 100%;
+    padding: 2px 0;
+    overflow: visible;
+}
+
+.wf-day {
+    cursor: default;
+    transition: opacity 0.2s ease;
+}
+
+.wf-day:hover {
+    opacity: 1 !important;
+}
+
+.wf-label {
+    color: var(--widget-text);
+}
+
+.wf-temps {
+    color: var(--widget-text);
+}
+
+.wf-temps .hi {
+    font-weight: 600;
+}
+
+.wf-temps .lo {
+    font-weight: 400;
+}

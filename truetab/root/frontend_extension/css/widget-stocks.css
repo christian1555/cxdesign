@@ -1,0 +1,65 @@
+/* ============================================
+   STOCKS WIDGET
+   ============================================ */
+
+.stocks-header {
+    font-size: clamp(10px, 0.95vw, 12px);
+}
+
+.stock-item {
+    display: flex;
+    justify-content: space-between;
+    padding: clamp(4px, 0.4vw, 6px) 4px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    flex-shrink: 0;
+    font-size: clamp(12px, 1.1vw, 14px);
+}
+
+.stock-item:last-child {
+    border-bottom: none;
+}
+
+.stock-change {
+    font-size: clamp(11px, 1vw, 13px);
+}
+
+.stock-change.positive {
+    color: #4ade80;
+}
+
+.stock-change.negative {
+    color: #f87171;
+}
+
+/* Stocks Scrollable */
+.stocks-scrollable {
+    overflow: hidden auto;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Only add padding when scrollable */
+.stocks-scrollable.is-scrollable {
+    padding-right: 4px;
+}
+
+/* Compact stocks (1 box tall) - smaller text */
+.widget[id*="stocks"].span-1x1 .stock-item,
+.widget[id*="stocks"].span-1x2 .stock-item,
+.widget[id*="stocks"].span-2x1 .stock-item,
+.widget[id*="stocks"].span-3x1 .stock-item,
+.widget[id*="stocks"].span-4x1 .stock-item,
+.widget[id*="stocks"].span-5x1 .stock-item,
+.widget[id*="stocks"].span-6x1 .stock-item {
+    font-size: clamp(10px, 0.95vw, 12px) !important;
+}
+
+.widget[id*="stocks"].span-1x1 .stock-change,
+.widget[id*="stocks"].span-1x2 .stock-change,
+.widget[id*="stocks"].span-2x1 .stock-change,
+.widget[id*="stocks"].span-3x1 .stock-change,
+.widget[id*="stocks"].span-4x1 .stock-change,
+.widget[id*="stocks"].span-5x1 .stock-change,
+.widget[id*="stocks"].span-6x1 .stock-change {
+    font-size: clamp(9px, 0.85vw, 11px) !important;
+}

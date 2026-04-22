@@ -1,0 +1,37 @@
+/* ============================================
+   STYLES MANIFEST - TrueTab Extension
+   All styles split into modular CSS files.
+   Import order matters: base → layout → widgets → UI → utilities
+   ============================================ */
+
+/* Foundation */
+@import 'css/base.css';
+@import 'css/grid.css';
+
+/* Widget core & individual widgets */
+@import 'css/widgets-core.css';
+@import 'css/widget-og-search.css';
+@import 'css/widget-input-bar.css';
+@import 'css/widget-chatbot.css';
+@import 'css/widget-cinema.css';
+@import 'css/widget-youtube.css';
+@import 'css/widget-clock.css';
+@import 'css/widget-weather.css';
+@import 'css/widget-calendar.css';
+@import 'css/widget-stocks.css';
+@import 'css/widget-apps.css';
+@import 'css/widget-misc.css';
+
+/* Settings & modals */
+@import 'css/modal.css';
+@import 'css/settings-popup.css';
+@import 'css/settings-forms.css';
+@import 'css/iconify-picker.css';
+@import 'css/auth.css';
+
+/* Shared UI */
+@import 'css/scrollbars.css';
+@import 'css/utilities.css';
+
+/* Third-party */
+@import 'css/highlight-github.min.css';

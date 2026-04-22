@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Palisade & Jurassic — Choose Your Browser</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+</head>
+<body>
+
+<div class="scene">
+  <!-- Nav -->
+  <nav class="site-nav">
+    <a href="#" class="nav-link">About</a>
+    <a href="#" class="nav-link">Features</a>
+    <a href="#" class="nav-link">Blog</a>
+    <a href="#" class="nav-link">Support</a>
+  </nav>
+
+  <!-- Ambient Orbs -->
+  <div class="orb orb--blue-1"></div>
+  <div class="orb orb--blue-2"></div>
+  <div class="orb orb--gold-1"></div>
+  <div class="orb orb--gold-2"></div>
+
+  <!-- Gradient Blend -->
+  <div class="blend-zone"></div>
+
+  <!-- Divider -->
+  <div class="divider"></div>
+
+  <!-- LEFT — Palisade -->
+  <div class="half half--left">
+    <div class="browser-card">
+      <div class="browser-icon browser-icon--palisade">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="6" y="10" width="5" height="22" rx="1.5" fill="rgba(255,255,255,0.9)"/>
+          <rect x="14" y="6" width="5" height="26" rx="1.5" fill="rgba(255,255,255,0.95)"/>
+          <rect x="22" y="8" width="5" height="24" rx="1.5" fill="rgba(255,255,255,0.9)"/>
+          <rect x="30" y="12" width="5" height="20" rx="1.5" fill="rgba(255,255,255,0.85)"/>
+          <rect x="4" y="32" width="33" height="3" rx="1.5" fill="rgba(255,255,255,0.5)"/>
+        </svg>
+      </div>
+      <h1 class="browser-name browser-name--palisade">Palisade</h1>
+      <p class="browser-tagline browser-tagline--palisade">Lightweight</p>
+      <p class="browser-desc">
+        Chromium, but done right.
+      </p>
+      <div class="features">
+        <div class="feature feature--palisade">Zero telemetry by design</div>
+        <div class="feature feature--palisade">Built-in ad & tracker blocking</div>
+        <div class="feature feature--palisade">Fastest Chromium ever built</div>
+      </div>
+      <div class="download-group">
+        <button class="cta-btn cta-btn--palisade" data-browser="palisade">
+          <span class="btn-label">Download</span>
+          <span class="os-icon"></span>
+          <span class="btn-meta"></span>
+        </button>
+        <button class="cta-dropdown cta-dropdown--palisade" data-browser="palisade" aria-label="More download options">
+          <svg viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="download-menu download-menu--palisade" data-browser="palisade"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT — Jurassic -->
+  <div class="half half--right">
+    <div class="browser-card">
+      <div class="browser-icon browser-icon--jurassic">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 32 C10 32, 12 12, 20 8 C28 12, 30 32, 30 32" stroke="rgba(26,20,6,0.9)" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+          <circle cx="16" cy="20" r="2" fill="rgba(26,20,6,0.8)"/>
+          <circle cx="24" cy="20" r="2" fill="rgba(26,20,6,0.8)"/>
+          <path d="M16 27 Q20 30, 24 27" stroke="rgba(26,20,6,0.7)" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <path d="M8 15 L5 10" stroke="rgba(26,20,6,0.5)" stroke-width="2" stroke-linecap="round"/>
+          <path d="M32 15 L35 10" stroke="rgba(26,20,6,0.5)" stroke-width="2" stroke-linecap="round"/>
+          <path d="M20 8 L20 4" stroke="rgba(26,20,6,0.5)" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h1 class="browser-name browser-name--jurassic">Jurassic</h1>
+      <p class="browser-tagline browser-tagline--jurassic">Revolutionary</p>
+      <p class="browser-desc">
+        The future of browsing.
+      </p>
+      <div class="features">
+        <div class="feature feature--jurassic">Palisade foundation - safety and privacy</div>
+        <div class="feature feature--jurassic">One input bar to rule them all</div>
+        <div class="feature feature--jurassic">Make it your own</div>
+      </div>
+      <div class="download-group">
+        <button class="cta-btn cta-btn--jurassic" data-browser="jurassic">
+          <span class="btn-label">Download</span>
+          <span class="os-icon"></span>
+          <span class="btn-meta"></span>
+        </button>
+        <button class="cta-dropdown cta-dropdown--jurassic" data-browser="jurassic" aria-label="More download options">
+          <svg viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="download-menu download-menu--jurassic" data-browser="jurassic"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Particle Canvas -->
+  <canvas class="particles" id="particles"></canvas>
+
+  <!-- Noise -->
+  <div class="noise"></div>
+
+</div>
+
+<script src="main.js"></script>
+
+</body>
+</html>

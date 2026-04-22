@@ -1,0 +1,1022 @@
+/* ============================================
+   YOUTUBE SEARCH WIDGET
+   Discovery search state with 4-tab experience:
+   Search · Trending · History · Saved
+
+   Design language: Apple-inspired glassmorphism,
+   accent color-mix borders, cinema-consistent layout.
+   ============================================ */
+
+/* Suggestion Overlay Container */
+.yt-search-suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--widget-bg-color);
+    backdrop-filter: blur(var(--widget-bg-blur));
+    -webkit-backdrop-filter: blur(var(--widget-bg-blur));
+    border-radius: var(--icon-radius);
+    max-height: 520px;
+    z-index: 9999;
+    animation: fadeInDown 0.15s ease-out;
+}
+
+.yt-search-suggestions-overlay {
+    position: fixed;
+    z-index: 10000;
+}
+
+.yt-search-suggestions.expand-upwards {
+    top: auto;
+    bottom: 100%;
+    animation: fadeInUp 0.15s ease-out;
+}
+
+/* ============================================
+   TAB SELECTOR — Adapted from popup-tab-selector
+   with vertical dividers between tabs
+   ============================================ */
+
+.yt-tab-selector {
+    display: flex;
+    border-bottom: 1px solid color-mix(in srgb, var(--settings-accent-color) 25%, transparent);
+    flex-shrink: 0;
+    margin: -10px -5px 0 -10px;
+    width: calc(100% + 15px);
+    border-radius: var(--icon-radius) var(--icon-radius) 0 0;
+    overflow: hidden;
+}
+
+.yt-tab {
+    flex: 1;
+    padding: 11px 6px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--widget-text-color, rgba(255, 255, 255, 0.95));
+    opacity: 0.45;
+    transition: all 0.15s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    position: relative;
+    user-select: none;
+    min-height: 40px;
+}
+
+/* Vertical divider lines between tabs */
+.yt-tab + .yt-tab::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 25%;
+    height: 50%;
+    width: 1px;
+    background: rgba(255, 255, 255, 0.12);
+    pointer-events: none;
+}
+
+.yt-tab:hover {
+    opacity: 0.75;
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.yt-tab.active {
+    opacity: 1;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Hide divider next to active tab */
+.yt-tab.active + .yt-tab::before,
+.yt-tab.active::before {
+    opacity: 0;
+}
+
+.yt-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--settings-accent-color);
+}
+
+/* ============================================
+   SECTION HEADER (History, Saved panels)
+   ============================================ */
+
+.yt-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 4px 8px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 0.4);
+    background: linear-gradient(90deg,
+        color-mix(in srgb, var(--settings-accent-color) 50%, transparent) 0%,
+        rgba(255, 255, 255, 0.35) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.yt-clear-history-btn {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 11px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: all 0.15s ease;
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 500;
+    /* Reset gradient text for button */
+    -webkit-text-fill-color: initial;
+}
+
+.yt-clear-history-btn:hover {
+    color: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+/* ============================================
+   EMPTY STATE (no results / no history / etc.)
+   ============================================ */
+
+.yt-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    gap: 8px;
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.yt-empty-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.yt-empty-sub {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.25);
+}
+
+/* ============================================
+   SAVE BUTTON — Preview row bookmark
+   ============================================ */
+
+.yt-save-btn {
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.2);
+    padding: 6px;
+    border-radius: 6px;
+    transition: all 0.15s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+}
+
+.yt-suggestion-item:hover .yt-save-btn,
+.yt-save-btn.saved {
+    opacity: 1;
+}
+
+.yt-save-btn:hover {
+    color: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.yt-save-btn.saved {
+    color: var(--settings-accent-color);
+}
+
+.yt-save-btn.saved:hover {
+    opacity: 0.8;
+}
+
+/* REMOVE BUTTON — History items */
+.yt-remove-btn {
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.15);
+    padding: 4px;
+    border-radius: 4px;
+    transition: all 0.15s ease;
+    display: flex;
+    align-items: center;
+    opacity: 0;
+}
+
+.yt-suggestion-item:hover .yt-remove-btn {
+    opacity: 1;
+}
+
+.yt-remove-btn:hover {
+    color: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+/* SAVE BUTTON — Expanded detail view */
+.yt-detail-save-btn {
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.yt-detail-save-btn.saved {
+    color: var(--settings-accent-color);
+    border-color: color-mix(in srgb, var(--settings-accent-color) 35%, transparent);
+}
+
+.yt-detail-save-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-1px);
+}
+
+/* ============================================
+   SUGGESTION ITEMS — Preview Row
+   Consistent with cinema-suggestion-item pattern
+   ============================================ */
+
+.yt-suggestion-item {
+    padding: 12px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    transition: background 0.15s ease;
+    color: rgba(255, 255, 255, 0.95);
+    position: relative;
+}
+
+/* Accent-tinted separators — matches cinema pattern */
+.yt-suggestion-item:not(:first-child) {
+    border-top: 1px solid color-mix(in srgb, var(--settings-accent-color) 15%, transparent);
+}
+
+.yt-suggestion-item:hover,
+.yt-suggestion-item.active {
+    background: rgba(0, 0, 0, 0.35);
+}
+
+/* Preview layout: channel avatar + thumbnail + text */
+.yt-item-preview {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+/* Channel initial avatar */
+.yt-channel-avatar {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.95);
+    flex-shrink: 0;
+    align-self: center;
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
+}
+
+/* Thumbnail wrapper */
+.yt-sugg-thumb-wrap {
+    position: relative;
+    width: 140px;
+    min-width: 140px;
+    aspect-ratio: 16 / 9;
+    border-radius: 8px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.03);
+    flex-shrink: 0;
+}
+
+.yt-sugg-thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.yt-sugg-thumb.placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.yt-sugg-thumb.placeholder::before {
+    content: "\25B6";
+    font-size: 20px;
+    opacity: 0.2;
+}
+
+/* Subtle accent-tinted hover overlay on thumbnail */
+.yt-sugg-thumb-wrap::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        135deg,
+        color-mix(in srgb, var(--settings-accent-color) 40%, transparent) 0%,
+        rgba(0, 0, 0, 0.3) 100%
+    );
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    pointer-events: none;
+}
+
+.yt-suggestion-item:hover .yt-sugg-thumb-wrap::after {
+    opacity: 0.5;
+}
+
+/* Duration badge on thumbnail */
+.yt-duration-badge {
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 5px;
+    border-radius: 4px;
+    line-height: 1;
+    z-index: 1;
+    letter-spacing: 0.3px;
+}
+
+/* Text content */
+.yt-sugg-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.yt-sugg-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.95);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-height: 1.3;
+}
+
+.yt-sugg-channel {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.5);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.yt-sugg-meta {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.35);
+    letter-spacing: 0.2px;
+}
+
+/* ============================================
+   EXPANDED ITEM — YouTube-style layout:
+   Player (left) + Suggested sidebar (right)
+   Video info + Comments below, full width.
+   ============================================ */
+
+.yt-item-details {
+    padding: 12px 0 0 0;
+    display: none;
+}
+
+.yt-suggestion-item.expanded .yt-item-details {
+    display: block;
+    animation: yt-expand 0.25s ease-out;
+}
+
+.yt-suggestion-item.expanded .yt-item-preview {
+    display: none;
+}
+
+.yt-suggestion-item.expanded {
+    background: rgba(0, 0, 0, 0.25);
+    padding-bottom: 14px;
+}
+
+/* Top section: player + suggested sidebar side by side */
+.yt-detail-top {
+    display: flex;
+    gap: 10px;
+    align-items: stretch;
+    margin-bottom: 12px;
+}
+
+/* Player container — left side, ~58% width */
+.yt-player-container {
+    position: relative;
+    width: 58%;
+    min-width: 200px;
+    aspect-ratio: 16 / 9;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #000;
+    flex-shrink: 0;
+}
+
+.yt-player-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+}
+
+/* Play button poster overlay */
+.yt-player-placeholder {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.yt-player-poster {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.yt-play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.55);
+    border: none;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #fff;
+    transition: all 0.2s ease;
+    z-index: 2;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+.yt-play-btn:hover {
+    background: rgba(0, 0, 0, 0.75);
+    transform: translate(-50%, -50%) scale(1.08);
+}
+
+.yt-play-btn:active {
+    transform: translate(-50%, -50%) scale(0.95);
+    transition-duration: 0.1s;
+}
+
+/* ============================================
+   SUGGESTED VIDEOS SIDEBAR — Right side
+   Scrollable list of related videos
+   ============================================ */
+
+.yt-detail-sidebar {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.yt-sidebar-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    padding: 0 4px 8px;
+    background: linear-gradient(90deg,
+        color-mix(in srgb, var(--settings-accent-color) 55%, transparent) 0%,
+        rgba(255, 255, 255, 0.38) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    flex-shrink: 0;
+}
+
+.yt-sidebar-list {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.08) transparent;
+}
+
+.yt-sidebar-list::-webkit-scrollbar {
+    width: 4px;
+}
+
+.yt-sidebar-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.yt-sidebar-list::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+.yt-sidebar-empty {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.25);
+    font-style: italic;
+    padding: 12px 4px;
+    text-align: center;
+}
+
+/* Individual sidebar suggestion item */
+.yt-sidebar-item {
+    display: flex;
+    gap: 8px;
+    padding: 6px 4px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.yt-sidebar-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.yt-sidebar-thumb-wrap {
+    position: relative;
+    width: 100px;
+    min-width: 100px;
+    aspect-ratio: 16 / 9;
+    border-radius: 6px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.03);
+    flex-shrink: 0;
+}
+
+.yt-sidebar-thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.yt-sidebar-thumb.placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.yt-sidebar-thumb.placeholder::before {
+    content: "\25B6";
+    font-size: 14px;
+    opacity: 0.15;
+}
+
+.yt-sidebar-thumb-wrap .yt-duration-badge {
+    font-size: 9px;
+    padding: 1px 4px;
+    bottom: 3px;
+    right: 3px;
+}
+
+.yt-sidebar-text {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding-top: 1px;
+}
+
+.yt-sidebar-item-title {
+    font-size: 11.5px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-height: 1.25;
+}
+
+.yt-sidebar-item-channel {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.4);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.yt-sidebar-item-meta {
+    font-size: 9.5px;
+    color: rgba(255, 255, 255, 0.3);
+}
+
+/* Sidebar skeleton loader */
+.yt-sidebar-skeleton-item {
+    display: flex;
+    gap: 8px;
+    padding: 6px 4px;
+}
+
+.yt-sidebar-skeleton-thumb {
+    width: 100px;
+    min-width: 100px;
+    aspect-ratio: 16 / 9;
+    border-radius: 6px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.02) 100%);
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.5s ease-in-out infinite;
+}
+
+.yt-sidebar-skeleton-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding-top: 2px;
+}
+
+.yt-sidebar-skeleton-title {
+    width: 85%;
+    height: 11px;
+    border-radius: 3px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.02) 100%);
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.5s ease-in-out infinite;
+}
+
+.yt-sidebar-skeleton-channel {
+    width: 50%;
+    height: 9px;
+    border-radius: 3px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.015) 0%, rgba(255, 255, 255, 0.03) 50%, rgba(255, 255, 255, 0.015) 100%);
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.5s ease-in-out infinite;
+}
+
+/* ============================================
+   VIDEO INFO — Full width below player+sidebar
+   YouTube-style channel row with actions
+   ============================================ */
+
+.yt-detail-info-full {
+    padding: 0 2px;
+    margin-bottom: 10px;
+}
+
+.yt-detail-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.95);
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+
+.yt-detail-info-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+/* Channel row in detail — avatar + name + stats stacked */
+.yt-detail-channel-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+    flex: 1;
+}
+
+.yt-detail-channel-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    min-width: 0;
+}
+
+.yt-detail-channel {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.75);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.yt-detail-stats {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    font-size: 10.5px;
+    color: rgba(255, 255, 255, 0.38);
+}
+
+.yt-detail-stats span {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.yt-detail-description {
+    font-size: 11px;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.5);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-top: 8px;
+    padding: 8px 10px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+}
+
+/* Action buttons — right side of info row */
+.yt-detail-actions {
+    display: flex;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.yt-detail-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 5px 10px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 18px;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 600;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+}
+
+.yt-link-youtube {
+    color: #ff4444;
+}
+
+.yt-link-youtube:hover {
+    background: rgba(255, 0, 0, 0.12);
+    border-color: rgba(255, 0, 0, 0.3);
+}
+
+.yt-link-channel {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.yt-link-channel:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.22);
+}
+
+.yt-detail-link .iconify {
+    font-size: 13px;
+}
+
+/* ============================================
+   COMMENTS SECTION — Full width below player
+   ============================================ */
+
+.yt-comments-section {
+    padding: 0 2px;
+    border-top: 1px solid color-mix(in srgb, var(--settings-accent-color) 15%, transparent);
+    padding-top: 10px;
+}
+
+.yt-comments-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    background: linear-gradient(90deg,
+        color-mix(in srgb, var(--settings-accent-color) 60%, transparent) 0%,
+        rgba(255, 255, 255, 0.4) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.yt-comments-loading,
+.yt-comments-empty {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.35);
+    font-style: italic;
+    padding: 6px 0;
+}
+
+.yt-comment {
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.yt-comment:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.yt-comment-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 3px;
+}
+
+.yt-comment-avatar {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.yt-comment-author {
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.yt-comment-time {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.yt-comment-text {
+    font-size: 11px;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.8);
+    word-break: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.yt-comment-likes {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.35);
+    margin-top: 3px;
+}
+
+/* ============================================
+   LOAD MORE BUTTON
+   ============================================ */
+
+.yt-load-more-btn {
+    padding: 10px;
+    text-align: center;
+    color: var(--widget-text-color);
+    opacity: 0.65;
+    cursor: pointer;
+    border-top: 1px solid color-mix(in srgb, var(--settings-accent-color) 15%, transparent);
+    transition: all 0.2s ease;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.yt-load-more-btn:hover {
+    opacity: 1;
+    background: color-mix(in srgb, var(--settings-accent-color) 8%, transparent);
+}
+
+/* ============================================
+   SKELETON LOADER
+   ============================================ */
+
+.yt-skeleton-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.yt-skeleton-item {
+    padding: 12px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+.yt-skeleton-item:not(:first-child) {
+    border-top: 1px solid color-mix(in srgb, var(--settings-accent-color) 10%, transparent);
+}
+
+/* Skeleton channel avatar circle */
+.yt-skeleton-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.02) 100%);
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.5s ease-in-out infinite;
+    flex-shrink: 0;
+    align-self: center;
+}
+
+.yt-skeleton-thumb {
+    width: 140px;
+    min-width: 140px;
+    aspect-ratio: 16 / 9;
+    border-radius: 8px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.02) 100%);
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.5s ease-in-out infinite;
+    flex-shrink: 0;
+}
+
+.yt-skeleton-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.yt-skeleton-title {
+    width: 75%;
+    height: 14px;
+    border-radius: 4px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.02) 100%);
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.5s ease-in-out infinite;
+}
+
+.yt-skeleton-channel {
+    width: 40%;
+    height: 10px;
+    border-radius: 3px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.015) 0%, rgba(255, 255, 255, 0.03) 50%, rgba(255, 255, 255, 0.015) 100%);
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.5s ease-in-out infinite;
+}
+
+.yt-skeleton-meta {
+    width: 55%;
+    height: 9px;
+    border-radius: 3px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.01) 0%, rgba(255, 255, 255, 0.025) 50%, rgba(255, 255, 255, 0.01) 100%);
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.5s ease-in-out infinite;
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+@keyframes yt-expand {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

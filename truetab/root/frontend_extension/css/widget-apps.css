@@ -1,0 +1,410 @@
+/* ============================================
+   APPS SCROLLER & SINGLE APP WIDGET
+   ============================================ */
+
+/* Apps Scroller - Locked at 2 boxes high, horizontal scroll only */
+.apps-scroller-widget {
+    padding: clamp(8px, 1vw, 12px);
+}
+
+/* Apps scroller at 1 box tall - remove vertical padding */
+.apps-scroller-compact {
+    padding: 0 6px 0 !important;
+    margin-top: 0 !important;
+}
+
+.apps-scroller-title {
+    padding: 0 10px;
+    margin-bottom: 7px;
+    font-size: clamp(10px, 0.95vw, 12px);
+    margin-top: -2.5px;
+}
+
+.apps-scroller-content {
+    flex: 1;
+    overflow: auto hidden;
+    padding: 10px 0 12px 0;
+    display: flex;
+    justify-content: flex-start;
+    min-height: 0;
+}
+
+/* Center content when not scrollable */
+.apps-scroller-content.not-scrollable {
+    justify-content: center;
+}
+
+.apps-scroller-content.not-scrollable .app-grid {
+    width: auto;
+    justify-content: center;
+}
+
+.apps-scroller-compact-height {
+    margin-bottom: 8px;
+    padding: 0 !important;
+    margin-top: 0 !important;
+}
+
+/* Remove top margin and reduce height for app items when compact */
+.apps-scroller-compact-height .app-item {
+    margin-top: 0 !important;
+    height: auto !important;
+}
+
+.apps-scroller-content .app-grid {
+    display: flex !important;
+    flex-wrap: nowrap;
+    gap: 8px;
+    height: 100%;
+    justify-content: flex-start;
+    margin: 0;
+    width: max-content;
+    grid-template-columns: none;
+    margin-left: -3.1px !important;
+    margin-right: -3.1px !important;
+}
+
+.apps-scroller-content .app-item {
+    flex: 0 0 auto;
+    height: var(--icon-height);
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    margin-top: 10px;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    padding: 0;
+    border-radius: 0;
+    transition: transform 0.2s ease;
+    scroll-snap-align: start;
+    gap: calc(var(--icon-width) * 0.05);
+}
+
+.apps-scroller-content .app-item .single-app-icon {
+    width: calc(var(--icon-width) * 0.75);
+    height: calc(var(--icon-width) * 0.75);
+    border-radius: calc(var(--icon-radius) * 0.9);
+    flex-shrink: 0;
+    transition: background 0.2s ease;
+}
+
+.apps-scroller-content .app-item:hover .single-app-icon {
+    opacity: 0.9;
+}
+
+.apps-scroller-content .single-app-icon-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.apps-scroller-content .single-app-icon-emoji {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(var(--icon-width) * 0.5);
+}
+
+.apps-scroller-content .single-app-icon-svg {
+    color: var(--widget-icon-color);
+}
+
+.apps-scroller-content .single-app-icon-svg .iconify {
+    color: var(--widget-icon-color);
+}
+
+.apps-scroller-content .single-app-name {
+    font-size: calc(var(--icon-width) * 0.13);
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    font-weight: 500;
+    color: var(--widget-text-color);
+}
+
+.apps-scroller-content .app-item:hover {
+    transform: scale(1.05);
+}
+
+.apps-scroller-content .app-item:first-child {
+    padding-left: 4px;
+}
+
+.apps-scroller-content .app-item:last-child {
+    padding-right: 4px;
+}
+
+/* Compact apps scroller (1 box tall) - smaller icons and text */
+.apps-scroller-content .apps-compact .single-app-icon {
+    width: calc(var(--icon-width) * 0.6);
+    height: calc(var(--icon-width) * 0.6);
+    border-radius: calc(var(--icon-radius) * 0.6);
+}
+
+.apps-scroller-content .apps-compact .single-app-icon-emoji {
+    font-size: calc(var(--icon-width) * 0.6 * 0.5);
+}
+
+.apps-scroller-content .apps-compact .single-app-name {
+    font-size: calc(var(--icon-width) * 0.11);
+}
+
+/* Reduced margin for 1 box tall app scroller */
+.apps-scroller-compact-height .app-item {
+    margin-top: 8px !important;
+}
+
+/* Move scrollbar in 2px on each side for 1 box tall */
+.apps-scroller-compact-height::-webkit-scrollbar-track {
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+/* Apps Scroller - Smaller icons for 2-wide widgets */
+.widget[id*="apps"].span-2x1 .single-app-icon,
+.widget[id*="apps"].span-2x2 .single-app-icon,
+.widget[id*="apps"].span-2x3 .single-app-icon {
+    font-size: clamp(18px, 1.8vw, 22px) !important;
+}
+
+/* Apps Scroller - Medium icons for 3-wide widgets */
+.widget[id*="apps"].span-3x1 .single-app-icon,
+.widget[id*="apps"].span-3x2 .single-app-icon,
+.widget[id*="apps"].span-3x3 .single-app-icon {
+    font-size: clamp(22px, 2.2vw, 26px) !important;
+}
+
+/* Hide app titles when setting is enabled */
+body.hide-app-titles .single-app-name,
+body.hide-app-titles .apps-scroller-content .single-app-name {
+    display: none !important;
+}
+
+/* Adjust app items when titles are hidden to make icons slightly bigger */
+body.hide-app-titles .app-item {
+    gap: 0 !important;
+}
+
+body.hide-app-titles .single-app-icon {
+    width: calc(var(--icon-width) * 0.9) !important;
+    height: calc(var(--icon-width) * 0.9) !important;
+}
+
+body.hide-app-titles .apps-scroller-content .app-item .single-app-icon {
+    width: calc(var(--icon-width) * 0.85) !important;
+    height: calc(var(--icon-width) * 0.85) !important;
+    border-radius: calc(var(--icon-radius) * 1.02) !important;
+}
+
+/* Widget-level app names toggle */
+.apps-scroller-content[data-hide-labels="true"] .single-app-name {
+    display: none !important;
+}
+
+.apps-scroller-content[data-hide-labels="true"] .app-item {
+    gap: 0 !important;
+}
+
+.apps-scroller-content[data-hide-labels="true"] .app-item .single-app-icon {
+    width: calc(var(--icon-width) * 0.80) !important;
+    height: calc(var(--icon-width) * 0.80) !important;
+    border-radius: calc(var(--icon-radius) * 0.96) !important;
+}
+
+/* Single App Widget (1x1 iOS-style) - Glass background only on icon */
+.single-app-widget {
+    padding: 0 !important;
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.single-app-link {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: white;
+    gap: calc(var(--icon-width) * 0.06);
+    padding: 4px;
+    box-sizing: border-box;
+    transition: transform 0.2s ease;
+}
+
+.single-app-icon {
+    width: calc(var(--icon-width) * 0.85);
+    height: calc(var(--icon-width) * 0.85);
+    border-radius: calc(var(--icon-radius) * 0.9);
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    background: var(--widget-bg-color);
+    backdrop-filter: blur(var(--widget-bg-blur));
+    -webkit-backdrop-filter: blur(var(--widget-bg-blur));
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: background 0.2s ease;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    background-clip: padding-box;
+    -webkit-font-smoothing: antialiased;
+}
+
+.single-app-link:hover {
+    transform: scale(1.05);
+}
+
+.single-app-link:hover .single-app-icon {
+    opacity: 0.9;
+    backdrop-filter: blur(var(--widget-bg-blur));
+    -webkit-backdrop-filter: blur(var(--widget-bg-blur));
+}
+
+.single-app-link:active {
+    transform: scale(0.98);
+}
+
+.single-app-icon-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit;
+    padding: 4px;
+}
+
+.single-app-icon-emoji {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(var(--icon-width) * 0.5);
+}
+
+.single-app-icon-svg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    font-size: calc(var(--icon-width) * 0.5);
+    padding: 4px;
+    color: var(--widget-icon-color);
+}
+
+.single-app-icon-svg .iconify {
+    color: var(--widget-icon-color);
+}
+
+/* Disable coloring when colorIcon is false */
+.no-color-icon.single-app-icon-img,
+.no-color-icon.single-app-icon-svg,
+.no-color-icon .iconify {
+    color: inherit !important;
+    filter: none !important;
+}
+
+.single-app-name {
+    font-size: calc(var(--icon-width) * 0.15);
+    text-align: center;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    font-weight: 500;
+    line-height: normal;
+    color: var(--widget-text-color);
+}
+
+/* 1x1 Widget App - No Glass BG (hideBackground = true) */
+.widget.no-background .single-app-icon {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* ============================================
+   APP SCROLLER - GLASS BG MODES
+   ============================================ */
+
+/* Mode 1: "Show All" - Widget BG + App border (NO app bg to avoid double darkness) */
+.widget:has([data-glass-mode="show-all"]) .single-app-icon {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: none !important;
+}
+
+/* Mode 2: "Widget BG" - Widget BG only (NO app border, NO app bg) */
+.widget:has([data-glass-mode="widget-bg"]) .single-app-icon {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Mode 3: "App BG" - App BG only (NO widget bg) */
+.widget:has([data-glass-mode="app-bg"]) {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Mode 4: "Hide" - Hide everything */
+.widget:has([data-glass-mode="hide"]) {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+.widget:has([data-glass-mode="hide"]) .single-app-icon {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Single App - Size-based scaling for different widget sizes */
+.widget[id*="app"].span-1x1 .single-app-icon {
+    font-size: clamp(30px, 3vw, 42px) !important;
+}
+
+/* 2x2 and similar medium sizes */
+.widget[id*="app"].span-2x2 .single-app-icon,
+.widget[id*="app"].span-2x1 .single-app-icon,
+.widget[id*="app"].span-1x2 .single-app-icon {
+    font-size: clamp(38px, 3.8vw, 54px) !important;
+}
+
+/* 3x3 and larger sizes */
+.widget[id*="app"].span-3x3 .single-app-icon,
+.widget[id*="app"].span-3x2 .single-app-icon,
+.widget[id*="app"].span-2x3 .single-app-icon,
+.widget[id*="app"].span-3x1 .single-app-icon,
+.widget[id*="app"].span-1x3 .single-app-icon {
+    font-size: clamp(54px, 5.4vw, 74px) !important;
+}
+
+/* 4x4 and extra large sizes */
+.widget[id*="app"].span-4x4 .single-app-icon,
+.widget[id*="app"].span-4x3 .single-app-icon,
+.widget[id*="app"].span-3x4 .single-app-icon,
+.widget[id*="app"].span-4x2 .single-app-icon,
+.widget[id*="app"].span-2x4 .single-app-icon {
+    font-size: clamp(64px, 6.4vw, 88px) !important;
+}
