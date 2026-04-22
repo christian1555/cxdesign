@@ -1096,14 +1096,10 @@ body.demo-open .vline { opacity: 0; }
   letter-spacing: 0.1em;
   text-transform: uppercase;
   padding: 0.5rem 1rem;
-  border: 1px solid var(--border);
+  border: 1px solid var(--gold);
   border-radius: 100px;
-  color: var(--text-faint);
-  transition: all 0.3s ease;
-}
-.foto-tools span:hover {
-  border-color: var(--gold);
   color: var(--gold);
+  box-shadow: 0 0 20px rgba(201, 168, 76, 0.1);
 }
 
 
