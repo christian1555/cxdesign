@@ -27,7 +27,7 @@ const i18n = {
 
     'norrild.desc': 'Website for a professional consulting firm. The entire site was designed and built by me — from layout and branding to the final code.',
     'truetab.desc': "Chromium extension I built to make new tabs actually useful. Custom widgets, dark theme, and an interface that isn't annoying to look at 50 times a day.",
-    'palisade.desc': 'Web design where the whole process from idea to finished product was done with AI as an integrated part of the workflow. Responsive, fast, and with a modern visual style.',
+    'palisade.desc': 'Web design where the whole process to finished product was done with AI as an integrated part of the workflow. Responsive, fast, and with a modern visual style.',
     'cta.startdemo': 'Start demo',
     'cta.closedemo': 'Close demo',
 
